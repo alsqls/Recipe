@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8" import="java.sql.*" %>
+<jsp:useBean id="memMgr" class="ch12.MemberMgr" />
 <%
    //DataBase 연동
    request.setCharacterEncoding("utf-8");
@@ -13,6 +14,8 @@
     String passwd = request.getParameter("password");
     String name;
     String e_mail;
+    String DBid="";
+    String DBpassword="";
     //String passwd2 = request.getParameter("password");
     //String name = request.getParameter("name");
     //String e_mail = request.getParameter("email");
@@ -25,9 +28,9 @@
    
    stmt = conn.createStatement();
  int count=0;
- //counter=stmt.executeUpdate("insert into member(id,passwd,name,e_mail) values('"+id+"','"+passwd+"','"+name+"','"+e_mail+"')");
+    //counter=stmt.executeUpdate("insert into member(id,passwd,name,e_mail) values('"+id+"','"+passwd+"','"+name+"','"+e_mail+"')");
 	/*
-   PreparedStatement pstmt = null;
+    PreparedStatement pstmt = null;
 	String sql = "insert into member values(?,?,?,?,?)";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1,id);
@@ -51,12 +54,47 @@
     <%
       if(rs!=null){
         while(rs.next()){
-            id = rs.getString("id");
-            passwd = rs.getString("passwd");
+            DBid = rs.getString("id");
+            DBpassword = rs.getString("passwd");
             name = rs.getString("name");
             e_mail = rs.getString("e_mail");
         }
        }
+       
+        
+       
+       if(rs == null || DBid.length() == 0){
+%>
+        <script>
+            alert("ID를 확인해 주세요.");
+            window.history.back();
+        </script>
+<%        
+       }else if(rs != null){
+            boolean loginCheck = memMgr.PassCheck(id,DBpassword);
+%>
+        <script>
+            i = "<%=DBid%>"
+            prompt(i);
+            window.history.back();
+        </script>
+<%   
+            if(loginCheck){
+                session.setAttribute("idKey",DBid);
+	            response.sendRedirect("index.jsp");
+            }else{
+%>
+                <script>
+                    alert("비밀번호가 일치하지 않습니다.");
+                    window.history.back();
+                </script>
+<%
+            }        
+        }
+%>
+        
+        
+<%
 
 //데이터베이스 연동시 필요한 예외처리...
    }catch(SQLException sqlException){
@@ -75,10 +113,7 @@
          catch(Exception ex){}
    }
 %>  
-   <script>
-        alert("로그인 되었습니다.");
-	location.href="index.jsp";
-    </script>     
+        
 </body>
 </html>
         
