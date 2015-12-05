@@ -237,7 +237,7 @@ function list(){ //목록
 		<div class="siter-header-inner">
 			<div class="site-branding">
 								<div class="site-branding-text">
-                                    <h1 class="site-title"><a href=./index.html rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
+                                    <h1 class="site-title"><a href=./index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
 										<p class="site-description">Cooking with happiness.</p>
 				</div>	
 			</div><!-- .site-branding -->
@@ -254,9 +254,9 @@ function list(){ //목록
 	</header><!-- #masthead -->
     
 <center><br>
-<h1>◆ JSPBoard ◆</h1><br>
+<h3> Board</h3><br>
 
-<table align=center border=0 width=80% style="background-color : FFCCCC;">
+<table align=center border=0 width=80%>
  <tr>
   <td align=left >Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
   <td align=left><a href="SessionLogInConfirm.jsp"><center><input type="button" value="HOME"></center></a></td>
@@ -272,8 +272,8 @@ function list(){ //목록
 <%  }
    else {
 %>
-   <table border=0 width=100% cellpadding=2 cellspacing=0 style="background-color : FFFFCC ;" >
-    <tr align=center bgcolor=#D0D0D0 height=120%>
+   <table border=0 width=100% cellpadding=0 cellspacing=0 >
+    <tr align=center bgcolor=#FFFFFF height=120%>
      <td>번 호</td>
 	 <td>제 목</td>
 	 <td>이 름</td>

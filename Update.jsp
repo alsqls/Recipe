@@ -1,69 +1,25 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
-<%
+
+<jsp:useBean id="myDB" class="ch12.BoardMgr" />
+<% 
 	String memberId = (String)session.getAttribute("memID");
 	session.setMaxInactiveInterval(1000);
+	int nowPage = Integer.parseInt(request.getParameter("page")); //페이지번호
+	int num = Integer.parseInt(request.getParameter("num")); //글번호
+	BoardBean tempBoard = myDB.getBoard(num);
+	String subject = tempBoard.getSubject(); //제목
+	String name = tempBoard.getName(); //이름
+	String content = tempBoard.getContent(); //내용
+	String email = tempBoard.getEmail(); //이메일
 	
 	String id = request.getParameter("id");
 	String passwd = request.getParameter("password");
 	String name2 = request.getParameter("name");
-	String e_mail = request.getParameter("email");
-	
-   if(memberId == null){
+	String e_mail = request.getParameter("email");	
 %>
 
-<%
-	}
-  request.setCharacterEncoding("euc-kr");
-   Class.forName("org.gjt.mm.mysql.Driver");
-   
-   Connection conn = null;
-   
-  
-   Statement stmt = null;
-   ResultSet rs = null;
-    try{
-      
-   //커넥션 생성
-   conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
-   
-   // 커넥션을 통해 질의를 전송하기 위한 객체(stmt)
-   // stmt = conn.createStatement();
-   // 객체(stmt)를 통해서 질의를 수행할 메소드를 사용
-   // 질의수행 결과는 ResultSet으로 받는다.
 
- stmt = conn.createStatement();
- int count=0;
-  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
- 
-		
-		
-		 if(rs!=null){
-			while(rs.next()){
-			id = rs.getString("id");
-            passwd = rs.getString("passwd");
-            name2 = rs.getString("name");
-            e_mail = rs.getString("e_mail");
-			}
-		 }
-		
-	}catch(SQLException sqlException){
-      System.out.println("sql exception");
-   }catch(Exception exception){
-      System.out.println("exception");
-   }finally{
-      if( rs != null ) 
-         try{ rs.close(); } 
-         catch(SQLException ex) {}
-      if( stmt != null ) 
-         try { stmt.close(); } 
-         catch(SQLException ex) {}
-      if( conn != null ) 
-         try{ conn.close(); }
-         catch(Exception ex){}
-   }
-%>
-       
 <html>
 <head>
 <meta charset="UTF-8">
@@ -88,7 +44,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <link rel='stylesheet' id='print-css-7' href='https://s1.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1444132114g' type='text/css' media='print' />
 <link rel='stylesheet' id='all-css-8' href='https://s0.wp.com/wp-content/themes/h4/global.css?m=1420737423g' type='text/css' media='all' />
 <script type='text/javascript' src='https://s0.wp.com/_static/??-eJyNkV1OAzEMhC9ENqC2Ah4Qr1wjzQ5ZL3GSxk6rcnoCKqqgy49kyZL9jTW27aEYSj62EWLnHruGejylYZYr+xtgmEJ1ioEpfcI+J0XSd5bzliJME1QXeq0Pes4LXMmiDJEOLXS/WqK0Jxz+xGZocf7FVAi9XkzdxhxMiS1QEjuCs5DCOK+079tcVr7rdUL3a0sFU2PLiHk8nk0M7NRPT6Aw6b+l2DUXzfQhMuIrFV26v5TzqX9+3Il65Ieb9Xq1ub1e3d/Nb7DPuNA='></script>
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" /> 
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress.com" />
 <link rel='shortlink' href='http://wp.me/6Eg3j' />
@@ -165,93 +121,76 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
             </ul>	
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+<br><br>
+    
+<script>
+function list(){
+	document.list.action="List.jsp";
+ 	document.list.submit();
+ } 
+</script>
+    
+<script>
+	var memberId = "<%=memberId%>";
+	function check() {
+		if(memberId != "admin"){
+			if (document.form.pass.value == "") {
+				alert("수정을 위해 패스워드를 입력하세요.");
+				form.pass.focus();
+				return false;
+			}
+		}
+	   
+	   document.form.submit();
+	}
+</script>
+</head>
 <center>
 <br><br>
 
-<br>
-<table width=50% cellspacing=0 cellpadding=3 align=center>
-<form name=post method=post action="PostProc.jsp" >
+<form name=form method=post action="UpdateProc.jsp" >
+<table width=70% cellspacing=0 cellpadding=7>
  <tr>
-  <td align=left>
-   <table border=0 width=60% align=center>
+  <td align=center>
+   <table border=0>
     <tr>
-     <td width=10%>성 명</td>
-     <td width=90% align=left><input type=text name=name size=10 maxlength=30 ></td>
-	 <!--<td width=90%><input type=text name=name size=10 maxlength=8 value=<%=id%> readonly=readonly> </td> -->
+     <td width=20%>성 명</td>
+     <td align=left width=80%><input type=text name=name value="<%=name%>" size=30 maxlength=20></td>
+	</tr>
+    <tr>
+     <td width=20%>E-Mail</td>
+     <td align=left width=80%><input type=text name=email size=30 value="<%=email%>" maxlength=30></td>
     </tr>
+	<tr>
+     <td width=20%>제 목</td>
+     <td align=left width=80%><input type=text name=subject size=50 value="<%=subject%>" maxlength=50></td>
     <tr>
-	 <td width=10% >E-Mail</td>
-	 <td width=50% align=left><input type=text name=email size=30 maxlength=30 ></td>
+     <td width=20%>내 용</td>
+     <td align=left width=80%><textarea name=content rows=10 cols=50><%=content%></textarea></td>
     </tr>
-    <tr>
-     <td width=10%>홈페이지</td>
-     <td width=90% align=left><input type=text name=homepage size=40 maxlength=30 ></td>
+	<tr>
+     <td width=20%>비밀 번호</td> 
+     <td align=left width=80%><input type=password name=pass size=15 maxlength=15>
+      수정시에는 비밀번호가 필요합니다.</td>
     </tr>
-    <tr>
-     <td width=10%>제 목</td>
-     <td width=90% align=left><input type=text name=subject size=50 maxlength=30></td>
-    </tr>
-    <tr>
-     <td width=10%>내 용</td>
-     <td width=90% align=left><textarea name=content rows=10 cols=50 ></textarea></td>
-    </tr>
-    <tr>
-     <td width=10%>비밀 번호</td> 
-     <td width=90% align=left ><input type=password name=pass size=15 maxlength=15></td>
-	
-    </tr>
-    <tr>
-     <td colspan="2">
-         <center><input type=submit value="등록" onclick="inputCheck()" >
-         <input type=reset value="다시쓰기">
+	<tr>
+     <td colspan=2>
+         <center>
+	  <input type=Button value="수정완료" onClick="check()">
+      <input type=reset value="다시수정"> 
+      <input type=button value="뒤로" onClick="history.go(-1)">
          </center>
-     </td>
+	 </td>
     </tr> 
-    <input type=hidden name=ip value="<%=request.getRemoteAddr()%>" >
    </table>
   </td>
  </tr>
-</form> 
+ <input type=hidden name=page value="<%=nowPage %>">
+ <input type=hidden name=num value="<%=num%>">
 </table>
-
-
-    
-<script>
-function inputCheck(){
-	if(!post.name.value){
-		alert("이름을 입력하세요");
-		post.name.focus();
-		return;
-	}
-	if(!post.email.value){
-		alert("이메일을 입력하세요");
-		post.email.focus();
-		return;
-	}
-	if(!post.homepage.value){
-		alert("홈페이지를 입력하세요");
-		post.homepage.focus();
-		return;
-	}
-	if(!post.subject.value){
-		alert("제목을 입력하세요");
-		post.subject.focus();
-		return;
-	}
-	if(!post.content.value){
-		alert("내용을 입력하세요");
-		post.content.focus();
-		return;
-	}
-	if(!post.pass.value){
-		alert("비밀번호을 입력하세요");
-		post.pass.focus();
-		return;
-	}
-	document.post.submit();
-}
-</script>
-   <footer id="colophon" class="site-footer" role="contentinfo">
+</form> 
+</center>
+ <footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
 <!-- Footer Block Left -->
@@ -424,4 +363,3 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 
 </body>
 </html>
-

@@ -1,69 +1,90 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
-<%
-	String memberId = (String)session.getAttribute("memID");
-	session.setMaxInactiveInterval(1000);
-	
-	String id = request.getParameter("id");
-	String passwd = request.getParameter("password");
-	String name2 = request.getParameter("name");
-	String e_mail = request.getParameter("email");
-	
-   if(memberId == null){
-%>
+<%@ page import="ch12.*"%>
 
+<jsp:useBean id="myDB" class="ch12.BoardMgr" />
+<jsp:useBean id="utilMgr" class="ch12.UtilMgr"/>
 <%
-	}
-  request.setCharacterEncoding("euc-kr");
-   Class.forName("org.gjt.mm.mysql.Driver");
-   
-   Connection conn = null;
-   
-  
-   Statement stmt = null;
-   ResultSet rs = null;
-    try{
-      
-   //커넥션 생성
-   conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
-   
-   // 커넥션을 통해 질의를 전송하기 위한 객체(stmt)
-   // stmt = conn.createStatement();
-   // 객체(stmt)를 통해서 질의를 수행할 메소드를 사용
-   // 질의수행 결과는 ResultSet으로 받는다.
-
- stmt = conn.createStatement();
- int count=0;
-  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
- 
-		
-		
-		 if(rs!=null){
-			while(rs.next()){
-			id = rs.getString("id");
-            passwd = rs.getString("passwd");
-            name2 = rs.getString("name");
-            e_mail = rs.getString("e_mail");
+	int num = Integer.parseInt(request.getParameter("num"));
+	int nowPage = Integer.parseInt(request.getParameter("page"));
+	String keyField = request.getParameter("keyField"); 
+    String keyWord = request.getParameter("keyWord");
+	
+	Cookie[] cookies = request.getCookies(); //쿠키생성
+	
+	
+	boolean ii = false;
+	
+	cookies = request.getCookies(); 
+	
+	if(cookies.length>0){ //배열에 쿠키가 있다면
+		for(int i =0; i<cookies.length;i++){
+			if(cookies[i].getName().equals(String.valueOf(num))){ //글의 넘버와 같은게 존재
+				ii = true;
+				String cookieName = String.valueOf(num); //num의 value를 가진 cookie 새로 할당
+				Cookie cookie = new Cookie(cookieName, "1"); //1 로 해서 
+				cookie.setMaxAge(86400); //세션 하루동안 유지
+				cookie.setValue("1"); //1 : 조회수 올라감 0:조회수 안올라감 
+				response.addCookie(cookie); 
 			}
-		 }
+		}
+	}
+	
+	if(cookies.length == 0){ //쿠키배열에 쿠키가 없다면
+		String cookieName = String.valueOf(num); // 쿠키 할당
+		Cookie cookie = new Cookie(cookieName, "1"); 
+		cookie.setMaxAge(86400); 
+		cookie.setValue("1");
+		response.addCookie(cookie); 
+	}
+	
+	if(ii == false){ //쿠키는 있지만 그 게시글의 num과 다르다면 조회수를 1 증가해야 함
+		String cookieName = String.valueOf(num);
+		Cookie cookie = new Cookie(cookieName, "1");
+		cookie.setMaxAge(86400);
+		cookie.setValue("1");
+		response.addCookie(cookie); 
+	}
+	cookies = request.getCookies(); 
+	
+	String tempIp="";
+	String isFirst="0";
+	
+	if(cookies.length>0){ //쿠키가 있다.
+		for(int i=0; i<cookies.length;i++){ 
+			if(cookies[i].getName().equals(String.valueOf(num))){
+				tempIp = cookies[i].getName(); //여기서는 필요없지만 쿠키name받아오기
+				isFirst = cookies[i].getValue(); // 쿠키 value값 isFirst에 할당
+			}
+		}
+	}
+
+	BoardBean tempBoard = myDB.getBoardUp(num,isFirst); // isFirst가 0과 같으면 num의 게시글 조회수 ++ 
+	
+	cookies = request.getCookies(); 
+	
+	if(cookies.length>0){
+		for(int i=0; i<cookies.length;i++){ 
+			if(cookies[i].getName().equals(String.valueOf(num))){
+				
+				String cookieName = String.valueOf(num);
+				Cookie cookie = new Cookie(cookieName, "1");
+				cookie.setMaxAge(86400);
+				cookie.setValue("1");
+				response.addCookie(cookie); 
+			}
+		}
+	}
 		
-	}catch(SQLException sqlException){
-      System.out.println("sql exception");
-   }catch(Exception exception){
-      System.out.println("exception");
-   }finally{
-      if( rs != null ) 
-         try{ rs.close(); } 
-         catch(SQLException ex) {}
-      if( stmt != null ) 
-         try { stmt.close(); } 
-         catch(SQLException ex) {}
-      if( conn != null ) 
-         try{ conn.close(); }
-         catch(Exception ex){}
-   }
+	String name = tempBoard.getName();
+	String email = tempBoard.getEmail();
+	String homepage = tempBoard.getHomepage();
+	String subject = tempBoard.getSubject();
+	String regdate = tempBoard.getRegdate();
+	String content = tempBoard.getContent();
+	String ip = tempBoard.getIp();
+	int count= tempBoard.getCount();
 %>
-       
 <html>
 <head>
 <meta charset="UTF-8">
@@ -88,7 +109,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <link rel='stylesheet' id='print-css-7' href='https://s1.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1444132114g' type='text/css' media='print' />
 <link rel='stylesheet' id='all-css-8' href='https://s0.wp.com/wp-content/themes/h4/global.css?m=1420737423g' type='text/css' media='all' />
 <script type='text/javascript' src='https://s0.wp.com/_static/??-eJyNkV1OAzEMhC9ENqC2Ah4Qr1wjzQ5ZL3GSxk6rcnoCKqqgy49kyZL9jTW27aEYSj62EWLnHruGejylYZYr+xtgmEJ1ioEpfcI+J0XSd5bzliJME1QXeq0Pes4LXMmiDJEOLXS/WqK0Jxz+xGZocf7FVAi9XkzdxhxMiS1QEjuCs5DCOK+079tcVr7rdUL3a0sFU2PLiHk8nk0M7NRPT6Aw6b+l2DUXzfQhMuIrFV26v5TzqX9+3Il65Ieb9Xq1ub1e3d/Nb7DPuNA='></script>
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" /> 
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress.com" />
 <link rel='shortlink' href='http://wp.me/6Eg3j' />
@@ -165,93 +186,78 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
             </ul>	
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
-<center>
 <br><br>
-
-<br>
-<table width=50% cellspacing=0 cellpadding=3 align=center>
-<form name=post method=post action="PostProc.jsp" >
+    
+<script>
+function list(){
+	document.list.action="List.jsp";
+ 	document.list.submit();
+ } 
+</script>
+</head>
+<body>
+<br><br>
+<table align=center width=70% border=0 cellspacing=3 >
  <tr>
-  <td align=left>
-   <table border=0 width=60% align=center>
-    <tr>
-     <td width=10%>성 명</td>
-     <td width=90% align=left><input type=text name=name size=10 maxlength=30 ></td>
-	 <!--<td width=90%><input type=text name=name size=10 maxlength=8 value=<%=id%> readonly=readonly> </td> -->
+  <td colspan=2>
+   <table border=0 cellpadding=3 cellspacing=0 width=100%> 
+    <tr colspan=2> 
+	 <td align=center bgcolor=#dddddd width=10%> 이 름 </td>
+	 <td  align=left bgcolor=#ffffe8><%=name%></td>
     </tr>
     <tr>
-	 <td width=10% >E-Mail</td>
-	 <td width=50% align=left><input type=text name=email size=30 maxlength=30 ></td>
+	 <td align=center bgcolor=#dddddd width=10%> 등록날짜 </td>
+	 <td align=left bgcolor=#ffffe8><%=regdate%></td>
+	</tr>
+    <tr>
+	 <td align=center bgcolor=#dddddd width=10%> 메 일 </td>
+	 <td align=left bgcolor=#ffffe8 ><a href="mailto:<%=email%>"><%=email%></a></td>
     </tr>
     <tr>
-     <td width=10%>홈페이지</td>
-     <td width=90% align=left><input type=text name=homepage size=40 maxlength=30 ></td>
-    </tr>
-    <tr>
-     <td width=10%>제 목</td>
-     <td width=90% align=left><input type=text name=subject size=50 maxlength=30></td>
-    </tr>
-    <tr>
-     <td width=10%>내 용</td>
-     <td width=90% align=left><textarea name=content rows=10 cols=50 ></textarea></td>
-    </tr>
-    <tr>
-     <td width=10%>비밀 번호</td> 
-     <td width=90% align=left ><input type=password name=pass size=15 maxlength=15></td>
-	
-    </tr>
-    <tr>
-     <td colspan="2">
-         <center><input type=submit value="등록" onclick="inputCheck()" >
-         <input type=reset value="다시쓰기">
-         </center>
-     </td>
-    </tr> 
-    <input type=hidden name=ip value="<%=request.getRemoteAddr()%>" >
+	 <td align=center bgcolor=#dddddd width=10%> 홈페이지 </td>
+	 <td align=left bgcolor=#ffffe8 ><a href="http://<%=homepage%>" target="_new">http://<%=homepage%></a></td> 
+	</tr>
+    <tr> 
+     <td align=center bgcolor=#dddddd> 제 목</td>
+     <td align=left bgcolor=#ffffe8 ><%=subject%> </td>
+   </tr>
+   <tr> 
+    <td colspan=4><br><%=utilMgr.getContent(content)%><br></td>
+   </tr>
+   <tr>
+    <td colspan=4 align=right>
+     <%=ip%>로 부터 글을 남기셨습니다./  조회수  <%=count%>
+    </td>
+   </tr>
    </table>
   </td>
  </tr>
-</form> 
+ <tr>
+  <td colspan=2> 
+      <center>
+	[ <a href="javascript:list()" >목 록</a> | 
+	<a href="Update.jsp?page=<%=nowPage%>&num=<%=num%>" >수 정</a> |
+	<a href="Reply.jsp?page=<%=nowPage%>&num=<%=num%>" >답 변</a> |
+	<a href="Delete.jsp?page=<%=nowPage%>&num=<%=num%>">삭 제</a> ]<br>
+      </center>
+  </td>
+ </tr>
 </table>
-
-
-    
-<script>
-function inputCheck(){
-	if(!post.name.value){
-		alert("이름을 입력하세요");
-		post.name.focus();
-		return;
-	}
-	if(!post.email.value){
-		alert("이메일을 입력하세요");
-		post.email.focus();
-		return;
-	}
-	if(!post.homepage.value){
-		alert("홈페이지를 입력하세요");
-		post.homepage.focus();
-		return;
-	}
-	if(!post.subject.value){
-		alert("제목을 입력하세요");
-		post.subject.focus();
-		return;
-	}
-	if(!post.content.value){
-		alert("내용을 입력하세요");
-		post.content.focus();
-		return;
-	}
-	if(!post.pass.value){
-		alert("비밀번호을 입력하세요");
-		post.pass.focus();
-		return;
-	}
-	document.post.submit();
-}
-</script>
-   <footer id="colophon" class="site-footer" role="contentinfo">
+<%
+if(keyWord==null || keyWord.equals("null")){ %>
+<form name="list" method="post">
+<input type="hidden" name="num" value="<%=num%>">
+<input type="hidden" name="page" value="<%=nowPage%>">
+</form>
+<%} else{ %>
+<form name="list" method="post">
+<input type="hidden" name="num" value="<%=num%>">
+<input type="hidden" name="page" value="<%=nowPage%>">
+<input type="hidden" name="keyField" value="<%=keyField%>">
+<input type="hidden" name="keyWord" value="<%=keyWord%>">
+</form>
+<%}%>
+  <footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
 <!-- Footer Block Left -->
@@ -424,4 +430,5 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 
 </body>
 </html>
+
 
