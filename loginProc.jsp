@@ -39,7 +39,7 @@
 	
 	//stmt.executeUpdate("update member set passwd='44442222' where id='Korea1'");	
       rs = stmt.executeQuery("SELECT * FROM member where id="+id+"");
- 
+ //
     %>
 <!DOCTYPE html>
 <html>
