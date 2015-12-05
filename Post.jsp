@@ -150,7 +150,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		<div class="siter-header-inner">
 			<div class="site-branding">
 								<div class="site-branding-text">
-                                    <h1 class="site-title"><a href=./index.html rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
+                                    <h1 class="site-title"><a href=./index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
 										<p class="site-description">Cooking with happiness.</p>
 				</div>	
 			</div><!-- .site-branding -->
@@ -169,43 +169,42 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <br><br>
 
 <br>
-<table width=80% cellspacing=0 cellpadding=3 align=center>
+<table width=50% cellspacing=0 cellpadding=3 align=center>
 <form name=post method=post action="PostProc.jsp" >
  <tr>
-  <td align=center>
-   <table border=0 width=100% align=center>
+  <td align=left>
+   <table border=0 width=60% align=center>
     <tr>
      <td width=10%>성 명</td>
-     <td width=90%><input type=text name=name size=10 maxlength=8 ></td>
+     <td width=90% align=left><input type=text name=name size=10 maxlength=60 ></td>
 	 <!--<td width=90%><input type=text name=name size=10 maxlength=8 value=<%=id%> readonly=readonly> </td> -->
     </tr>
     <tr>
-	 <td width=10%>E-Mail</td>
-	 <td width=90%><input type=text name=email size=30 maxlength=30 ></td>
+	 <td width=10% >E-Mail</td>
+	 <td width=50% align=left><input type=text name=email size=30 maxlength=30 ></td>
     </tr>
     <tr>
      <td width=10%>홈페이지</td>
-     <td width=90%><input type=text name=homepage size=40 maxlength=30 ></td>
+     <td width=90% align=left><input type=text name=homepage size=40 maxlength=30 ></td>
     </tr>
     <tr>
      <td width=10%>제 목</td>
-     <td width=90%><input type=text name=subject size=50 maxlength=30></td>
+     <td width=90% align=left><input type=text name=subject size=50 maxlength=30></td>
     </tr>
     <tr>
      <td width=10%>내 용</td>
-     <td width=90%><textarea name=content rows=10 cols=50 ></textarea></td>
+     <td width=90% align=left><textarea name=content rows=10 cols=50 ></textarea></td>
     </tr>
     <tr>
      <td width=10%>비밀 번호</td> 
-     <td width=90% ><input type=password name=pass size=15 maxlength=15></td>
+     <td width=90% align=left ><input type=password name=pass size=15 maxlength=15></td>
 	
     </tr>
     <tr>
-     <td colspan=2><hr size=1></td>
-    </tr>
-    <tr>
-     <td><input type=submit value="등록" onclick="inputCheck()" >&nbsp;&nbsp;
-         <input type=reset value="다시쓰기">&nbsp;&nbsp;
+     <td colspan="2">
+         <center><input type=submit value="등록" onclick="inputCheck()" >
+         <input type=reset value="다시쓰기">
+         </center>
      </td>
     </tr> 
     <input type=hidden name=ip value="<%=request.getRemoteAddr()%>" >
@@ -214,7 +213,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
  </tr>
 </form> 
 </table>
-</center>
+
 
     
 <script>
