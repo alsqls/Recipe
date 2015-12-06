@@ -2605,6 +2605,7 @@ a.header-search-btn {
   font-family: "Muli", sans-serif;
   font-size: .777777778em;
   margin: 2em 0; }
+
   .entry-meta a {
     color: #858585; }
     .entry-meta a:hover {
@@ -2612,7 +2613,7 @@ a.header-search-btn {
   .entry-meta .posted-on:after,
   .entry-meta .byline:after,
   .entry-meta .cat-links:after {
-    content: " / ";
+    content: " ◆ ";
     padding: 0 5px; }
 
 .read-more-wrap {

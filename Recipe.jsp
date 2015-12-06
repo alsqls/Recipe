@@ -78,7 +78,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 			</style>
 		</head>
 
-<body class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
+<body href='./css/cssStyle.css' class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
 <div id="page" class="hfeed site">
 	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
 
@@ -95,7 +95,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		<div class="siter-header-inner">
 			<div class="site-branding">
 								<div class="site-branding-text">
-                                    <h1 class="site-title"><a href=./index.html rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
+                                    <h1 class="site-title"><a href=./index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
 										<p class="site-description">Cooking with happiness.</p>
 				</div>	
 			</div><!-- .site-branding -->
@@ -128,26 +128,23 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 				<div class="entry-content">
 
-				<figure class="post-effect">
-				<rel="bookmark" aria-hidden="true">
-				<img width="900" height="614" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=26646420e96549b592bae36c91cbfe57" class="attachment-featured-thumb-1 wp-post-image" alt="Chair and window" />							
+				<figure class="post-effect"> 
+				<rel="bookmark" aria-hidden="false">
+				<!--<img width="900" height="614" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=26646420e96549b592bae36c91cbfe57" class="attachment-featured-thumb-1 wp-post-image" alt="Chair and window" />	-->						
 						
-						<figcaption>
+						<!--<figcaption>-->
 							<header class="entry-header">
-								<div class="entry-meta">
-									<span class="posted-on"> <rel="bookmark"></span><span class="cat-links">In  <rel="category tag">Home</span>	</div><!-- .entry-meta -->
-								<h2 class="entry-title"><rel="bookmark">Happy afternoons</h2>					
-                                    </header>
-								
-														</figcaption>
-					</figure>
-
+                                
+								<div><span class="posted-on"> <rel="bookmark"></span><span> In <rel="category tag">Home</span>	</div><!-- .entry-meta -->
+                                <div><span class="posted-on"> <rel="bookmark"></span><span> 1. <rel="category tag"><a href="./Recipe2.jsp">Home</a></span>	</div>
+								<!--<h2 class="entry-title"><rel="bookmark">Happy afternoons</h2> --> 
+                                 
+                                        </header>
+				    <!--</figcaption> -->
+					</figure> 
 				</div><!-- .entry-content -->
-
 			</article><!-- #post-## -->
-		</div><!-- end .featured-left -->
-                    
-
+		</div><!-- end .featured-left -->                
 </section><!-- .featured-wrap clear -->
 
 		
