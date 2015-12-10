@@ -99,6 +99,9 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 			</form>	
             
             <form name="read" method="post">
+<%
+   String keyWord = "keyword";
+%>
     <input type="hidden" name="keyWord" value="<%=keyWord%>">
  </form>
 <form name="list" method="post">
