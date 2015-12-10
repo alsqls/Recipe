@@ -72,7 +72,7 @@
         <input type="text" id="Username" required="required" name="name"/>
         <label for="Username">Name</label>
         <div class="bar"></div>
-      </div>
+        </div>
         <div class="input-container">
         <input type="text" id="Username" required="required" name="e_mail"/>
         <label for="Username">E_mail</label>

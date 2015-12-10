@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="https://melodydemo.wordpress.com/xmlrpc.php">
+
 
 
 <title>Recipe | Cook Together</title>
@@ -108,14 +107,16 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
 			<a href="#" id="header-search-btn" class="header-search-btn"><i class="fa fa-search"></i><span class="screen-reader-text">Search</span></a>
+            <ul id="primary-menu" class="menu">
             <%  
                if(mem_id != null){
             %>
-                <ul id="primary-menu" class="menu"><li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
+                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
+                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./profile.jsp">Profile</a></li>
             <%
                }else{
             %>
-                <ul id="primary-menu" class="menu"><li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
+               <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
             <%
                }
             %>
