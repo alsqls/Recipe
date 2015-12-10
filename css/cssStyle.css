@@ -1623,13 +1623,13 @@ table tr {
   padding-left: 1.11em; }
 
 table td:first-child {
-  text-align: left;
-  padding-left: 20px;
+  text-align: center;
+  padding-left: 10px;
   border-left: 0; }
 
 table td {
   color: #555;
-  padding: 1em;
+  padding: 8;
   border-top: 1px solid #ffffff;
   border-bottom: 1px solid #CCC;
   border-left: 1px solid #CCC;

@@ -261,7 +261,7 @@ function list(){ //목록
   <td align=left >Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
   <td align=left><a href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
  </tr>
-</table>
+</table>    
 <table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >
  <tr>
   <td align=center colspan=2 >
@@ -337,7 +337,6 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 <% if ((nowBlock * pagePerBlock) + i + 1 == totalPage)  break; %>
 <%} %>
 
-::: 
 
 <% if (totalBlock > nowBlock + 1) {%> 
 <a href="List.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 

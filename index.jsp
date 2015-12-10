@@ -87,13 +87,27 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-search-form">
-			<form role="search" method="get" class="search-form" action="./Recipe2.jsp">
+			<!--<form role="search" method="get" class="search-form" action="./Recipe2.jsp"> -->
+                
+                <form action="List.jsp" name="search" method="post">
+                
 				<label>
 					<span class="screen-reader-text">Search for:</span>
-					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="KeyWord" title="Search for:" />
 				</label>
 				<input type="submit" class="search-submit" value="Search" />
-			</form>			<a class="close-search" id="close-search" href="#"><span class="screen-reader-text">Close Search box</span></a>
+			</form>	
+            
+            <form name="read" method="post">
+    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+ </form>
+<form name="list" method="post">
+ <input type="hidden" name="reload" value="true">
+ <input type="hidden" name="page" value="0">
+ <input type="hidden" name="nowBlock" value="0"> 
+</form>
+            
+            <a class="close-search" id="close-search" href="#"><span class="screen-reader-text">Close Search box</span></a>
 		</div>
 		<div class="siter-header-inner">
 			<div class="site-branding">
