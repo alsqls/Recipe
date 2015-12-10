@@ -1602,7 +1602,7 @@ table {
   background: #FAE0D4;
   border: 1px solid #CCC;
   font-size: .888888889em;
-  margin: 0 0 3.75em;
+  margin: 0 0 0.75em;
   width: 100%; }
   table a {
     color: #555; }
@@ -1619,11 +1619,10 @@ table th:first-child {
   padding-left: 1.11em; }
 
 table tr {
-  text-align: center;
+  text-align: left;
   padding-left: 1.11em; }
 
 table td:first-child {
-  text-align: center;
   padding-left: 10px;
   border-left: 0; }
 
@@ -1632,7 +1631,7 @@ table td {
   padding: 8;
   border-top: 1px solid #ffffff;
   border-bottom: 1px solid #CCC;
-  border-left: 1px solid #CCC;
+  border-left: 0px solid #CCC;
   background: #EEE; }
 
 table tr:last-child td {

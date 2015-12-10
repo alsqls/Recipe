@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 <jsp:useBean id="myDB" class="ch12.BoardMgr" />
-
+<%
+    String mem_id = (String)session.getAttribute("idKey");
+%>
 <%
 	String memberId = (String)session.getAttribute("memID");
 	session.setMaxInactiveInterval(1000);
@@ -200,9 +202,6 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 				}
 			</style>
 
-    
-    <title>JSPBoard</title>
-<!--<link href="style.css" rel="stylesheet" type="text/css"> -->
 <script>
 function check() {
      if (document.search.keyWord.value == "") //체크
@@ -246,25 +245,40 @@ function list(){ //목록
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
 			<ul id="primary-menu" class="menu">
-                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./login.jsp">Logout</a></li>
+                  <ul id="primary-menu" class="menu">
+            <%  
+               if(mem_id != null){
+            %>
+                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
+                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./profile.jsp">Profile</a></li>
+            <%
+               }else{
+            %>
+               <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
+            <%
+               }
+            %>
+			
                 <li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
-                <li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li>
+             <!--   <li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
             </ul>	
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
     
 <center><br>
-<h3> Board</h3><br>
+    
+<h3> Recipe shared Here!</h3><br>
 
 <table align=center border=0 width=80%>
  <tr>
-  <td align=left >Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
-  <td align=left><a href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
+<td colspan="2"><a align=right href="./Listadmin.jsp"><input type="button" value="공지사항"></a></td>
+ 
+     <td align=left><a  href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
  </tr>
 </table>    
 <table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >
  <tr>
-  <td align=center colspan=2 >
+  <td align=center colspan=3 >
 <% 
    if (boardList.isEmpty()) { 
 %> 
@@ -322,6 +336,7 @@ function list(){ //목록
  </tr>
 
  <tr>
+      <td  align=left>Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
   <td align="left" > Go to Page 
 <% if(totalRecord !=0){ %> 
 <% if (nowBlock > 0) {%> 
@@ -391,9 +406,7 @@ for (int i = 0; i < pagePerBlock; i++) { %>
             </div>
         </div>
 <!-- Footer Block Center -->
-            <div class="footer-block footer-widget-area element-height" role="complementary">
-				rrr			
-            </div>	
+            <div class="footer-block footer-widget-area element-height" role="complementary">	</div>	
 				
 			<!-- Footer Block Right -->
 								<div class="footer-block footer-widget-area element-height" role="complementary">

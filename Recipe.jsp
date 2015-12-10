@@ -112,13 +112,29 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		</nav><!-- #site-navigation -->
 
 	</header><!-- #masthead -->
-	
-	<div id="content">
+
         <img width="8000" height="800" src=./img/meal1.jpg />	
         <table width="200" height="400" border="1">
-            <tr><td><div><span class="posted-on"> <rel="bookmark"></span><span> 1. <rel="category tag"><a href="./Recipe2.jsp">간장 떡볶이</a></span></div>	</td></tr>
+            <tr>
+                <td>								
+				<img width="300" height="200" src="./img/cook1.JPG"/><p>
+                    <center>간장떡볶이</center>
+                </td>
+                
+                <td>								
+				<img width="300" height="200" src="./img/cook1.JPG"/><p>
+                    <center>간장떡볶이</center>
+                </td>
+                <td>								
+				<img width="300" height="200" src="./img/cook1.JPG"/><p>
+                    <center>간장떡볶이</center>
+                </td>
+                <td>								
+				<img width="300" height="200" src="./img/cook1.JPG"/><p>
+                    <center>간장떡볶이</center>
+                </td>
+            </tr>
         </table>
-	</div><!-- #content --> 
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">

@@ -1,15 +1,137 @@
-<%@ page contentType="text/html;charset=utf-8" import="java.sql.*" %>
-    <%request.setCharacterEncoding("utf-8");%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import="ch12.*,java.util.*,java.sql.*"%>
+<jsp:useBean id="myDB" class="ch12.BoardMgr" />
 <%
     String mem_id = (String)session.getAttribute("idKey");
 %>
-<!DOCTYPE html>
-<html lang="en">
+<%
+	String memberId = (String)session.getAttribute("memID");
+	session.setMaxInactiveInterval(1000);
+	
+	/*
+	Cookie[] cookies = request.getCookies(); 
+	if(cookies!=null){ 
+		String cookieName = request.getRemoteAddr();
+		Cookie cookie = new Cookie(cookieName, "0");
+		cookie.setMaxAge(60);
+		response.addCookie(cookie); 
+	}
+	*/
+	
+	String id = request.getParameter("id");
+	String passwd = request.getParameter("password");
+	String name2 = request.getParameter("name");
+	String e_mail = request.getParameter("email");
+	
+	if(memberId == null){
+%>
+    <!--
+	<script>
+		 location.href = "SessionMemberLogIn.jsp";
+	</script>
+-->
+<%
+	}
+  request.setCharacterEncoding("euc-kr");
+   Class.forName("org.gjt.mm.mysql.Driver");
+   
+   Connection conn = null;
+   
+  
+   Statement stmt = null;
+   ResultSet rs = null;
+    try{
+      
+   //커넥션 생성
+   conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
+   
+   // 커넥션을 통해 질의를 전송하기 위한 객체(stmt)
+   // stmt = conn.createStatement();
+   // 객체(stmt)를 통해서 질의를 수행할 메소드를 사용
+   // 질의수행 결과는 ResultSet으로 받는다.
+
+ stmt = conn.createStatement();
+ int count=0;
+  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
+ 
+		
+		
+		 if(rs!=null){
+			while(rs.next()){
+			id = rs.getString("id");
+            passwd = rs.getString("passwd");
+            name2 = rs.getString("name");
+            e_mail = rs.getString("e_mail");
+			}
+		 }
+		
+	}catch(SQLException sqlException){
+      System.out.println("sql exception");
+   }catch(Exception exception){
+      System.out.println("exception");
+   }finally{
+      if( rs != null ) 
+         try{ rs.close(); } 
+         catch(SQLException ex) {}
+      if( stmt != null ) 
+         try { stmt.close(); } 
+         catch(SQLException ex) {}
+      if( conn != null ) 
+         try{ conn.close(); }
+         catch(Exception ex){}
+   }
+%>
+<%
+   //한 page 에는 글 10개
+   //10개의 page가 하나의 1개의 Block
+   int nowPage = 0; 
+   int nowBlock = 0; 
+   int totalRecord = 0;  //게시글 총 갯수
+   int numPerPage = 10;  //한 page 에는 글 10개     
+   int totalPage = 0;       
+   int totalBlock = 0;      
+   int pagePerBlock =0;    
+   int beginPerPage =0;    
+
+   String keyField ="" ;
+   String keyWord ="" ; 
+
+   Vector boardList;
+%>
+<% 
+  
+	if(request.getParameter("keyWord") !=null){ //찾고자 하는 단어
+			keyWord =request.getParameter("keyWord");
+			keyField =request.getParameter("keyField");
+		}
+		
+	if(request.getParameter("reload") !=null){
+		if(request.getParameter("reload").equals("true")){
+			keyWord ="";
+			keyField ="";
+			}
+	}
+
+	boardList= myDB.getBoardList(keyField,keyWord); 
+	totalRecord = boardList.size(); //벡터요소 몇개지?
+	numPerPage = 10; 
+	if (request.getParameter("page") != null) { nowPage= Integer.parseInt(request.getParameter("page")); } 
+	//넘어온 페이지를 현재 페이지로 설정하겠다.(nowPage)
+	beginPerPage = nowPage * numPerPage;
+	totalPage =(int)Math.ceil((double)totalRecord / numPerPage);
+	pagePerBlock = 10; 
+	if (request.getParameter("nowBlock") != null) {nowBlock = Integer.parseInt(request.getParameter("nowBlock"));}
+	totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);
+	//글이 500개면 50 page가 나오므로 5block이 나오게 된다.
+%>
+    
+    
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://melodydemo.wordpress.com/xmlrpc.php">
 
 <title>Recipe | Cook Together</title>
 <meta name='robots' content='noindex,follow' />
@@ -20,7 +142,7 @@
 function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
 /* ]]> */
 </script>
-<link rel='stylesheet' id='all-css-0' href='https://s0.wp.com/_static/??-eJx9kNFOwzAMRX+I4A1t014Q35KmZnUXx1HtUvXv8QZUm4r6Etk358iJYaohSTEsBjyGmscLFQVlyjjXQXpM9ty9JtUX+F/LdEWFHq3GdA33boU3WS6L0CKLkmGIyegrGq6TrXlUPqmQzUuxBWsngyVp/YVOgWbyspMpLBdbdpIBPeca7UYwthQxIzu2pXE9/Vm3svO9rFfywE/V6dA0dUDV4CfTyME6H7T2fmL4pYAxSzuD2pzvX/ng9/3hcDzv3067Y/8NRgO5dA==' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-0' href='./css/cssStyle.css' type='text/css' media='all' />
 <link rel='stylesheet' id='screen-css-1' href='https://s0.wp.com/wp-content/themes/premium/melody/inc/fontawesome/font-awesome.css?m=1440624119g' type='text/css' media='screen' />
 <link rel='stylesheet' id='melody-fonts-css'  href='https://fonts.googleapis.com/css?family=Muli%3A+300%2C+400%2C+300italic%7CLibre+Baskerville%3A400%2C700%2C400italic%7CLora%3A400italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
 <link rel='stylesheet' id='all-css-4' href='https://s2.wp.com/_static/??-eJx9i1EKgCAQRC+ULVZUP9FZSkxWdDfS6PoZQhREP8MbZh4cq1BMUVMEv4vV7QYpgPZsMWepQigAgThieoYb8vDtG83CsZoiMr2KWNyE25+66dmxSWggvR71kkY/yKZuu76uemlPbpZFwA==' type='text/css' media='all' />
@@ -79,41 +201,42 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 					}
 				}
 			</style>
-		</head>
 
+<script>
+function check() {
+     if (document.search.keyWord.value == "") //체크
+		{
+		 alert("검색어를 입력하세요.");
+		 document.search.keyWord.focus();
+		 return;
+	    }
+	 document.search.submit();
+ }
+
+function list(){ //목록
+	document.list.action="List.jsp";
+ 	document.list.submit();
+ }
+
+ function read(value){ //글 하나 읽는거.
+	document.read.action="Read.jsp";
+	document.read.num.value=value;
+	document.read.submit();   
+ }
+
+</script>
+</head>
+    
 <body class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
 <div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+	<!--<a class="skip-link screen-reader-text" href="#content">Skip to content</a>-->
 
 	<header id="masthead" class="site-header" role="banner">
-		<div class="header-search-form">
-			<form role="search" method="get" class="search-form" action="./Recipe2.jsp">
-                
-				<label>
-					<span class="screen-reader-text">Search for:</span>
-					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="" title="Search for:" />
-				</label>
-				<input type="submit" class="search-submit" value="Search" />
-			</form>	
-            
-            <form name="read" method="post">
-<%
-   String keyWord = "keyword";
-%>
-    <input type="hidden" name="keyWord" value="<%=keyWord%>">
- </form>
-<form name="list" method="post">
- <input type="hidden" name="reload" value="true">
- <input type="hidden" name="page" value="0">
- <input type="hidden" name="nowBlock" value="0"> 
-</form>
-            
-            <a class="close-search" id="close-search" href="#"><span class="screen-reader-text">Close Search box</span></a>
-		</div>
+		
 		<div class="siter-header-inner">
 			<div class="site-branding">
 								<div class="site-branding-text">
-                                    <h1 class="site-title"><a href="./index.jsp" rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
+                                    <h1 class="site-title"><a href=./index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
 										<p class="site-description">Cooking with happiness.</p>
 				</div>	
 			</div><!-- .site-branding -->
@@ -121,8 +244,8 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		</div><!-- end .site-header-inner -->
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
-			<a href="#" id="header-search-btn" class="header-search-btn"><i class="fa fa-search"></i><span class="screen-reader-text">Search</span></a>
-            <ul id="primary-menu" class="menu">
+			<ul id="primary-menu" class="menu">
+                  <ul id="primary-menu" class="menu">
             <%  
                if(mem_id != null){
             %>
@@ -136,210 +259,162 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                }
             %>
 			
-                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./List.jsp">Board</a></li>
-<li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
-<!--<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.html">Recent</a></li>-->
-</ul>	
+                <li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
+             <!--   <li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
+            </ul>	
 		</nav><!-- #site-navigation -->
-
 	</header><!-- #masthead -->
+    
+<center><br>
+    
+<h3> ※ NOTICE ※</h3><br>
 
-	
-		<div class="intro-block left clear">
+<table align=center border=0 width=80%>
+ <tr>
+<td colspan="2"><a align=right href="./List.jsp"><input type="button" value="공유게시판"></a></td>
+ 
+     <td align=left><a  href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
+ </tr>
+</table>    
+<table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >
+ <tr>
+  <td align=center colspan=3 >
+<% 
+   if (boardList.isEmpty()) { 
+%> 
+등록된 글이 없습니다.
+<%  }
+   else {
+%>
+   <table border=0 width=100% cellpadding=0 cellspacing=0 >
+    <tr align=center bgcolor=#FFFFFF height=120%>
+     <td>번 호</td>
+	 <td>제 목</td>
+	 <td>이 름</td>
+	 <td>날 짜</td>
+	 <td>조회수</td>
+    </tr>
+<% 
+	for (int i = beginPerPage;i < (beginPerPage+numPerPage); i++) { 
+	if (i==totalRecord) break;
 
-            <p> Everyone enjoy<br /></p>
+	BoardBean tempBoard = (BoardBean)boardList.elementAt(i);
+	String name =tempBoard.getName();
+	String subject = tempBoard.getSubject();
+	String email = tempBoard.getEmail();
+	String regdate = tempBoard.getRegdate();
+	int depth = tempBoard.getDepth();
+	int num = tempBoard.getNum(); 
+	int count =tempBoard.getCount();
+%>
+    <tr> 
+     <td align=center><%= totalRecord - i %></td>
+     <td>
+<%
+	if (depth > 0) { 
+	for (int re = 0; re < depth; re++) {
+%> 
+&nbsp;&nbsp;
+<% 
+	 }
+   }
+%>
+      <center><a href="javascript:read('<%=num%>')"><%= subject %></a></center>
+     </td>
+     <td align=center><a href="mailto:<%=email %>"><%= name %></a></td>
+     <td align=center><%=regdate%></td>
+     <td align=center><%=count%> </td>
+    </tr>
+<% 
+   } 
+%>
+</table> 
+<% 
+   } 
+%> 
+  </td>
+ </tr>
 
-		</div>
+ <tr>
+      <td  align=left>Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
+  <td align="left" > Go to Page 
+<% if(totalRecord !=0){ %> 
+<% if (nowBlock > 0) {%> 
+<a href="List.jsp?nowBlock=<%=nowBlock - 1 %>&page=<%=((nowBlock - 1) * pagePerBlock) %>">
+이전 <%=pagePerBlock %> 개</a>
+<%}%> 
+:::
+<%
+for (int i = 0; i < pagePerBlock; i++) { %>
+<a href="List.jsp?nowBlock=<%=nowBlock %>&page=<%=(nowBlock*pagePerBlock) + i %>">
+<%=(nowBlock * pagePerBlock) + i + 1 %></a>
 
-	
-	<div id="content" class="site-content">
-
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main clear" role="main">
-
-		
-<section class="featured-wrap match-height clear">
-
-	
-	
-			<div class="featured-content featured-left element-height">
-			<article id="post-136" class="post-136 post type-post status-publish format-standard has-post-thumbnail hentry category-home tag-featured">
-
-				<div class="entry-content">
-
-				<figure class="post-effect">
-				<rel="bookmark" aria-hidden="true">
-				<img width="900" height="614" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=26646420e96549b592bae36c91cbfe57" class="attachment-featured-thumb-1 wp-post-image" alt="Chair and window" />							
-						
-						<figcaption>
-							<header class="entry-header">
-								<div class="entry-meta">
-									<span class="posted-on"> <rel="bookmark"></span><span class="cat-links">In  <rel="category tag">Home</span>	</div><!-- .entry-meta -->
-								<h2 class="entry-title"><rel="bookmark">Happy afternoons</h2>						</header>
-								
-														</figcaption>
-					</figure>
-
-				</div><!-- .entry-content -->
-
-			</article><!-- #post-## -->
-		</div><!-- end .featured-left -->
-
-	
-
-	
-	
-		<div class="featured-content featured-right element-height">
-
-			<article id="post-122" class="post-122 post type-post status-publish format-standard has-post-thumbnail hentry category-food tag-colorful tag-dessert tag-featured tag-ice-cream">
-
-				<div class="entry-content">
-
-					<figure class="post-effect">
-													
-								<img width="450" height="300" src="http://www.seasoncatering.co.uk/wp-content/uploads/private-chef-hire.jpg" class="attachment-featured-thumb-2 wp-post-image" alt="Ice cream" />							
-						
-						<figcaption>
-							<header class="entry-header">
-								<div class="entry-meta">
-									<span class="posted-on"><rel="bookmark"></span>
-                                        <span class="cat-links">In <rel="category tag">Food</span>	</div><!-- .entry-meta -->
-								<h2 class="entry-title"><rel="bookmark">Main Dish</h2>							</header>
-							
-													</figcaption>
-					</figure>
-
-				</div><!-- .entry-content -->
-
-			</article><!-- #post-## -->
-
-	</div><!-- end .featured-right -->
-
-
-	
-
-	
-	
-</section><!-- .featured-wrap clear -->
-		
-			
-			<div class="post-grid match-height clear" id="post-grid">
-								
-					
-<article id="post-141" class="clear element-height post-141 post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle tag-music-2 tag-the-beatles tag-video tag-youtube">
-
-	<div class="entry-content">
-
-				<figure class="post-effect">
-				<rel="bookmark" aria-hidden="true">
-				<img width="525" height="575" src="./img/Toast.jpg" class="attachment-post-homepage-thumb wp-post-image" alt="Girls in the sun" />									
-			<figcaption>
-				<header class="entry-header">
-					<div class="entry-meta">
-						<span class="posted-on"><rel="bookmark"></span>
-                            <span class="cat-links">In <rel="category tag">Lifestyle</span>					
-                                </div><!-- .entry-meta -->
-					<h2 class="entry-title"><rel="bookmark">Brunch</h2>				
-                        </header>
-							</figcaption>
-		</figure>
-
-		
-	</div><!-- .entry-content -->
-
-</article><!-- #post-## -->
-
-				
-					
-<article id="post-140" class="clear element-height post-140 post type-post status-publish format-standard has-post-thumbnail hentry category-lifestyle">
-
-	<div class="entry-content">
-
-				<figure class="post-effect">
-				<rel="bookmark" aria-hidden="true">
-				<img width="525" height="575" src="./img/Choice.jpg" class="attachment-post-homepage-thumb wp-post-image" alt="girls in shadows" />									
-			<figcaption>
-				<header class="entry-header">
-					<div class="entry-meta">
-						<span class="posted-on"><rel="bookmark"></span><span class="cat-links">In <rel="category tag">Restaurant</span>					
-                            </div><!-- .entry-meta -->
-					<h2 class="entry-title"><rel="bookmark">Best Choice</h2></header>
-							</figcaption>
-		</figure>
-
-		
-	</div><!-- .entry-content -->
-
-</article><!-- #post-## -->
-
-				
-					
-<article id="post-138" class="clear element-height post-138 post type-post status-publish format-standard has-post-thumbnail hentry category-travel tag-europe tag-france">
-
-	<div class="entry-content">
-
-				<figure class="post-effect">
-				<rel="bookmark" aria-hidden="true">
-				<img width="525" height="575" src="./img/Pasta.jpg" class="attachment-post-homepage-thumb wp-post-image" alt="Paris Rooftops" />								
-			<figcaption>
-				<header class="entry-header">
-				<div class="entry-meta">
-				<span class="posted-on"><rel="bookmark"></span>
-                        <span class="cat-links">In <rel="category tag">Bottle</span>					
-                        </div><!-- .entry-meta -->
-					<h2 class="entry-title"><rel="bookmark">Pasta</h2></header>
-							</figcaption>
-		</figure>
-
-		
-	</div><!-- .entry-content -->
-
-</article><!-- #post-## -->
-
-							</div><!-- end .post-grid -->
-
-				<nav class="navigation posts-navigation" role="navigation">
-		<h2 class="screen-reader-text">Posts navigation</h2>
-
-						
-			
-			
-	</nav><!-- .navigation -->
-	
-		
-		</main><!-- #main -->
-	</div><!-- #primary -->
+<% if ((nowBlock * pagePerBlock) + i + 1 == totalPage)  break; %>
+<%} %>
 
 
-	</div><!-- #content -->
+<% if (totalBlock > nowBlock + 1) {%> 
+<a href="List.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 
+다음 <%=pagePerBlock %>개</a>
+<%}%>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+<%} %>
+  </td> 
+  <td align=right> 
+      <script language="javascript">
+	var memberId = "<%=memberId%>";
+		if(memberId == "admin"){
+            <a href="Post.jsp" > 글쓰기 </a>
+            
+        }
+</script>
+   
+ || <a href="javascript:list()"> 처음으로</a> 
+  </td>
+ </tr>
+</table><br>
+<form action="List.jsp" name="search" method="post">
+<table border=0 width=527 align=center cellpadding=4 cellspacing=0 >
+ <tr>
+  <td align=center valign=bottom>
+      <center>
+   <select name="keyField" size=1>
+    <option value="name"> 이 름
+    <option value="subject"> 제 목
+    <option value="content"> 내 용
+   </select>
+   <input type="text" size=16 name="keyWord"  value="">
+   <input type="button"  value="찾기" onClick="check()">
+   <input type="hidden" name="page" value="0">
+          </center>
+  </td>
+ </tr>
+</table>
+</form>
+<form name="read" method="post">
+    <input type="hidden" name="num" value="">
+    <input type="hidden" name="page" value="<%=nowPage%>">
+    <input type="hidden" name="keyField" value="<%=keyField%>">
+    <input type="hidden" name="keyWord" value="<%=keyWord%>">
+ </form>
+<form name="list" method="post">
+ <input type="hidden" name="reload" value="true">
+ <input type="hidden" name="page" value="0">
+ <input type="hidden" name="nowBlock" value="0"> 
+</form>
+    <footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
-			<!-- Footer Block Left -->
-							<div class="footer-block element-height">
-
-										<div class="footer-widget-area" role="complementary">
-							<aside id="text-2" class="widget widget_text"><h3 class="widget-title">About Cooking</h3>			
-                                <div class="textwidget" font-family:"NanumGothicBold">요리를 잘하지만 하지 않는 아내보다 더 참을 수 없는 유일한 것은 요리를 못하면서 하는 아내이다. <br>
-                                    <hr> by 로버트 프로스트 </div>
-		</aside>						</div>
-									</div>
-			
-			<!-- Footer Block Center -->
-								<div class="footer-block footer-widget-area element-height" role="complementary">
-						<aside id="search-2" class="widget widget_search"><h3 class="widget-title"></h3>
-                            <!--
-                            <form role="search" method="get" class="search-form" action="https://www.google.com/">
-				<label>
-					<span class="screen-reader-text">Search for:</span>
-					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="" title="Search for:" />
-				</label> 
-				<input type="submit" class="search-submit" value="Search" />
-			</form>
-                -->
-                </aside>					
-            </div>	
+<!-- Footer Block Left -->
+        <div class="footer-block element-height">
+             <div class="footer-widget-area" role="complementary">
+                 <aside id="text-2" class="widget widget_text"><h3 class="widget-title">About Cooking</h3>			
+                    <div class="textwidget" font-family:"NanumGothicBold">요리를 잘하지만 하지 않는 아내보다 더 참을 수 없는 유일한 것은 요리를 못하면서 하는 아내이다. <br> by 로버트 프로스트</div>
+                 </aside>		
+            </div>
+        </div>
+<!-- Footer Block Center -->
+            <div class="footer-block footer-widget-area element-height" role="complementary">	</div>	
 				
 			<!-- Footer Block Right -->
 								<div class="footer-block footer-widget-area element-height" role="complementary">
@@ -495,5 +570,7 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 	
 }
 </script>
+    
+</center>
 </body>
 </html>
