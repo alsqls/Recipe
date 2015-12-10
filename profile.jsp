@@ -47,7 +47,6 @@
 <body>
 	<div class="site-wrapper">
 		<div class="container">
-		<!-- form 태그가 각각 변수들을 다음페이지로 넘겨준다. action="memberInput_ok.jsp"이 다음페이지 -->
 			<form class="form-signup" name="f" method="post" action="./memberUpdate.jsp">
 		          <center><h2 style="color: #555" class="form-signup-heading">회원 정보</h2></center>
 				<div class="row">
@@ -114,19 +113,8 @@
 			f.email.focus();
 			return;
 		}
-		if (f.phone.value == "") {
-			alert("전화번호를 입력해 주세요.");
-			f.phone.focus();
-			return;
-		}
-		if (f.zipcode.value == "") {
-			alert("우편번호를 입력해 주세요.");
-			f.zipcode.focus();
-			return;
-		}		
-		if (f.address.value == "") {
-			alert("상세주소를 입력해 주세요.");
-			f.address.focus();
+        var result = window.confirm("정말 회원 정보를 수정하시겠습니까?");
+		if (!result) {//true
 			return;
 		}
 		document.f.submit();
@@ -136,7 +124,7 @@
 		//확인창 띄워서 예 누르면 닫기
 		var result = window.confirm("회원 정보 페이지에서 나가시겠습니까?");
 		if (result) {//true
-			location.href("./index.jsp");
+            location.href = "./index.jsp";
 		}
 	}
 </script>
