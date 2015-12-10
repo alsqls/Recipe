@@ -259,7 +259,7 @@ function list(){ //목록
 <table align=center border=0 width=80%>
  <tr>
   <td align=left >Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
-  <td align=left><a href="SessionLogInConfirm.jsp"><center><input type="button" value="HOME"></center></a></td>
+  <td align=left><a href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
  </tr>
 </table>
 <table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >

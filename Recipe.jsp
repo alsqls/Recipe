@@ -105,41 +105,33 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
 			<a href="#" id="header-search-btn" class="header-search-btn"><i class="fa fa-search"></i><span class="screen-reader-text">Search</span></a>
 			<ul id="primary-menu" class="menu">
-                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.html">Login</a></li>
-                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./login.html">Logout</a></li>
-<li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.html">Recipes</a></li>
-<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.html">Recent</a></li>
+                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
+                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./login.jsp">Logout</a></li>
+<li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
+<!--<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.">Recent</a></li>-->
 </ul>	
 		</nav><!-- #site-navigation -->
 
 	</header><!-- #masthead -->
-
 	
 	<div id="content" class="site-content">
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main clear" role="main">
-
-		
-<section class="featured-wrap match-height clear">
-
-	<div class="featured-content featured-left element-height">
+		<section class="featured-wrap match-height clear">
+            <div class="featured-content featured-left element-height">
 			<article id="post-136" class="post-136 post type-post status-publish format-standard has-post-thumbnail hentry category-home tag-featured">
-
 				<div class="entry-content">
-
 				<figure class="post-effect"> 
 				<rel="bookmark" aria-hidden="false">
-				<!--<img width="900" height="614" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=26646420e96549b592bae36c91cbfe57" class="attachment-featured-thumb-1 wp-post-image" alt="Chair and window" />	-->						
+				<!-- <img width="900" height="614" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=26646420e96549b592bae36c91cbfe57" class="attachment-featured-thumb-1 wp-post-image" alt="Chair and window" />	-->						
 						
 						<!--<figcaption>-->
 							<header class="entry-header">
-                                
-								<div><span class="posted-on"> <rel="bookmark"></span><span> In <rel="category tag">Home</span>	</div><!-- .entry-meta -->
-                                <div><span class="posted-on"> <rel="bookmark"></span><span> 1. <rel="category tag"><a href="./Recipe2.jsp">Home</a></span>	</div>
-								<!--<h2 class="entry-title"><rel="bookmark">Happy afternoons</h2> --> 
-                                 
-                                        </header>
+								<!--<div><span class="posted-on"> <rel="bookmark"></span><span>In <rel="category tag">Home</span></div>-->
+                                <div><span class="posted-on"> <rel="bookmark"></span><span> 1. <rel="category tag"><a href="./Recipe2.jsp">간장 떡볶이</a></span>	</div>
+								<!--<h2 class="entry-title"><rel="bookmark">Happy afternoons</h2> -->
+                            </header> 
 				    <!--</figcaption> -->
 					</figure> 
 				</div><!-- .entry-content -->
@@ -150,9 +142,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		
 		</main><!-- #main -->
 	</div><!-- #primary -->
-
-
-	</div><!-- #content -->
+	</div><!-- #content --> 
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">

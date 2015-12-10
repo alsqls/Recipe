@@ -161,7 +161,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 			<ul id="primary-menu" class="menu">
                 <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./login.jsp">Logout</a></li>
                 <li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
-                <li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li>
+                <!--<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
             </ul>	
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->

@@ -85,7 +85,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-search-form">
-			<form role="search" method="get" class="search-form" action="./Recipe.jsp">
+			<form role="search" method="get" class="search-form" action="./Recipe2.jsp">
 				<label>
 					<span class="screen-reader-text">Search for:</span>
 					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
