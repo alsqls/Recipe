@@ -3,4 +3,6 @@
 <%
     String mem_id = (String)session.getAttribute("idKey");
 %>
-    <h1>Profile</h1>
+<html>
+<head>
+<link href="<%=request.getContextPath()%>/assets/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
