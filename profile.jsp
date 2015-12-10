@@ -16,9 +16,10 @@
 		<div class="container">
 		<!-- form 태그가 각각 변수들을 다음페이지로 넘겨준다. action="memberInput_ok.jsp"이 다음페이지 -->
 			<form class="form-signup" name="f" method="post" action="./memberUpdate.jsp">
-
-				
-				<center><h2 style="color: #0288D1" class="form-signup-heading">회원 정보</h2></center>
+                &nbsp;&nbsp;&nbsp;&nbsp; 
+                
+		<center>
+            <h2 style="color: #555" class="form-signup-heading">회원 정보</h2></center>
 				<div class="row">
 					<input type="text" name="id" id="fancy-text" readonly="readonly" value="<%=mem_id%>"/> <label for="fancy-text">아이디</label>
 				</div>
@@ -34,9 +35,10 @@
 				<div class="row">
 					<input type="text" name="email" id="fancy-text" /> <label for="fancy-text">이메일</label>
 				</div>
-				
+				<center>
 				<button	onclick="inputCheck();" type="button">수정</button>
 				<button	onclick="cancel();" type="button">취소</button>
+                </center>
 			</form>
 		</div>
 	</div>
