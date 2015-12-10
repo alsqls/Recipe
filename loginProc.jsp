@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8" import="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head><title></title></head>
+<body>
 <%
    //DataBase 연동
    request.setCharacterEncoding("utf-8");
@@ -9,10 +13,6 @@
    Statement stmt = null;
    ResultSet rs = null;
    
-    String id = request.getParameter("id");
-    String passwd = request.getParameter("password");
-    String name;
-    String e_mail;
     //String passwd2 = request.getParameter("password");
     //String name = request.getParameter("name");
     //String e_mail = request.getParameter("email");
@@ -20,6 +20,11 @@
    int counter = 0;
    try{
       
+    String id = request.getParameter("id");
+    String inputPasswd = request.getParameter("password");
+    String passwd="";
+    String name;
+    String e_mail;
    //커넥션 생성
    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
    
@@ -38,13 +43,10 @@
     */
 	
 	//stmt.executeUpdate("update member set passwd='44442222' where id='Korea1'");	
-      rs = stmt.executeQuery("SELECT * FROM member where id="+id+"");
+      rs = stmt.executeQuery("SELECT * FROM member where id='"+id+"'");
  //
-    %>
-<!DOCTYPE html>
-<html>
-        <head><title></title></head>
-    <body>
+%>
+
         
    
     
@@ -57,10 +59,26 @@
             e_mail = rs.getString("e_mail");
         }
        }
-
+       
+       if(!passwd.equals(inputPasswd)){
+%>
+        <script>
+            alert("비밀번호가 틀렸습니다.");
+            window.history.back();
+        </script>
+<% 
+       }else{
+        session.setAttribute("idKey",id);
+%>
+        <script>
+            alert("로그인 되었습니다.");
+	       location.href="index.jsp";
+        </script>
+<%
+   }
 //데이터베이스 연동시 필요한 예외처리...
    }catch(SQLException sqlException){
-      System.out.println("sql exception");
+      System.out.println(".sql exception");
    }catch(Exception exception){
       System.out.println("exception");
    }finally{
@@ -74,11 +92,7 @@
          try{ conn.close(); }
          catch(Exception ex){}
    }
-%>  
-   <script>
-        alert("로그인 되었습니다.");
-	location.href="index.jsp";
-    </script>     
+%>     
 </body>
 </html>
         
