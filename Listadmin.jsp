@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
-<jsp:useBean id="myDB" class="ch12.BoardMgr" />
+<jsp:useBean id="myDB" class="ch12.BoardMgr1" />
 <%
     String mem_id = (String)session.getAttribute("idKey");
 %>
@@ -22,17 +22,8 @@
 	String passwd = request.getParameter("password");
 	String name2 = request.getParameter("name");
 	String e_mail = request.getParameter("email");
-	
-	if(memberId == null){
-%>
-    <!--
-	<script>
-		 location.href = "SessionMemberLogIn.jsp";
-	</script>
--->
-<%
-	}
-  request.setCharacterEncoding("euc-kr");
+
+  request.setCharacterEncoding("utf-8");
    Class.forName("org.gjt.mm.mysql.Driver");
    
    Connection conn = null;
@@ -214,7 +205,7 @@ function check() {
  }
 
 function list(){ //목록
-	document.list.action="List.jsp";
+	document.list.action="./Listadmin.jsp";
  	document.list.submit();
  }
 
@@ -360,17 +351,18 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 <%} %>
   </td> 
   <td align=right> 
-      <script language="javascript">
-	var memberId = "<%=memberId%>";
-          if(memberId == "admin"){
-        location.href="Post.jsp"; 
-        }
-</script>
-      <a href="Post.jsp"> 글쓰기</a> || <a href="javascript:list()"> 처음으로</a> 
+      <% 
+         if(memberId== "admin"){
+         %>
+      <a href="Post.jsp"> 글쓰기</a> 
+          <%
+             }
+             %>
+          || <a href="javascript:list()"> 처음으로</a> 
   </td>
  </tr>
 </table><br>
-<form action="List.jsp" name="search" method="post">
+<form action="Listadmin.jsp" name="search" method="post">
 <table border=0 width=527 align=center cellpadding=4 cellspacing=0 >
  <tr>
   <td align=center valign=bottom>

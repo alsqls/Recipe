@@ -8,7 +8,7 @@
 	ResultSet rs = null;
 	int counter =0;
 	String id = request.getParameter("id");
-	String passwd = request.getParameter("password");
+	String passwd = request.getParameter("password"); 
 	String name = request.getParameter("name");
 	String e_mail = request.getParameter("e_mail");
     

@@ -22,14 +22,7 @@
 	String passwd = request.getParameter("password");
 	String name2 = request.getParameter("name");
 	String e_mail = request.getParameter("email");
-   
-	if(memberId == null){
-%>
-	<script>
-		 location.href = "login.jsp";
-	</script>
-<%
-	}
+
   request.setCharacterEncoding("utf-8");
    Class.forName("org.gjt.mm.mysql.Driver");
    
@@ -50,18 +43,17 @@
 
  stmt = conn.createStatement();
  int count=0;
-  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
+  rs = stmt.executeQuery ("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
  
-		
-		
-		 if(rs!=null){
+		 if (rs!=null ){
 			while(rs.next()){
-			id = rs.getString("id");
-            passwd = rs.getString("passwd");
-            name2 = rs.getString("name");
-            e_mail = rs.getString("e_mail");
+			id = rs.getString ("id");
+            passwd = rs.getString ("passwd");
+            name2 = rs.getString ("name");
+            e_mail = rs.getString ("e_mail");
 			}
 		 }
+   
 if(id.equals("admin")){
 	myDB.deleteBoard(num);
 	  response.sendRedirect("List.jsp?page=" + nowPage);
@@ -70,7 +62,7 @@ rs = stmt.executeQuery("SELECT * FROM board WHERE num='"+(num+1)+"'");
 
 
 
-if(rs!=null){
+if(rs!=null ) {
 			while(rs.next()){
 			nextdepth = Integer.parseInt(rs.getString("depth"));
 			}
@@ -115,7 +107,8 @@ if(rs!=null){
 	history.go(-1);
 </script>
 <%
-	}else{
+	}
+   else{
 	if(nextdepth>=1){
 %>
 		<script>
@@ -131,8 +124,7 @@ if(rs!=null){
   }
 %>
 <html>
-<head><title>JSPBoard</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="./css/cssStyle.css" rel="stylesheet" type="text/css">
 <script language="javascript">
 	function check() {
 
@@ -178,10 +170,6 @@ else if("<%=nextdepth%>"=="2"){
 	  <input type=password name="pass" size=17 maxlength=15>
 	 </td> 
     </tr>
-    <tr>
-     <td><hr size=1 color=#eeeeee></td>
-    </tr>
-    <tr>
      <td align=center>
 	  <input type=button value="삭제완료" onClick="check()"> 
       <input type=reset value="다시쓰기"> 
