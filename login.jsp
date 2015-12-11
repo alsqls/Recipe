@@ -1,4 +1,16 @@
-
+<%@ page contentType="text/html;charset=utf-8" import="java.sql.*" %>
+<%
+    String mem_id = (String)session.getAttribute("idKey");
+%>
+<%
+    if(mem_id != null){
+%>
+    <script>
+        location.href = "./index.jsp";
+    </script>
+<%
+   }
+%>
 <!DOCTYPE html>
 <html >
   <head>

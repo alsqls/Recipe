@@ -2,16 +2,20 @@
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 <%
 	String memberId = (String)session.getAttribute("memID");
-	session.setMaxInactiveInterval(1000);
+    String mem_id = (String)session.getAttribute("idKey");
+	session.setMaxInactiveInterval(6000);
 	
 	String id = request.getParameter("id");
 	String passwd = request.getParameter("password");
 	String name2 = request.getParameter("name");
 	String e_mail = request.getParameter("email");
 	
-   if(memberId == null){
+   if(mem_id == null){
 %>
-
+    <script>
+        alert("로그인을 먼저하세요.");
+        location.href = "./login.jsp";
+    </script>
 <%
 	}
   request.setCharacterEncoding("euc-kr");

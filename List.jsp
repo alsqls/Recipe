@@ -5,6 +5,14 @@
     String mem_id = (String)session.getAttribute("idKey");
 %>
 <%
+    if(mem_id == null){
+%>
+    <script>
+        alert("로그인을 먼저하세요.");
+        location.href = "./login.jsp";
+    </script>
+<%
+   }
 	String memberId = (String)session.getAttribute("memID");
 	session.setMaxInactiveInterval(1000);
 	
