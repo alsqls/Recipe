@@ -31,7 +31,9 @@
 function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
 /* ]]> */
 </script>
-<link rel='stylesheet' id='all-css-0' href='https://s0.wp.com/_static/??-eJx9kNFOwzAMRX+I4A1t014Q35KmZnUXx1HtUvXv8QZUm4r6Etk358iJYaohSTEsBjyGmscLFQVlyjjXQXpM9ty9JtUX+F/LdEWFHq3GdA33boU3WS6L0CKLkmGIyegrGq6TrXlUPqmQzUuxBWsngyVp/YVOgWbyspMpLBdbdpIBPeca7UYwthQxIzu2pXE9/Vm3svO9rFfywE/V6dA0dUDV4CfTyME6H7T2fmL4pYAxSzuD2pzvX/ng9/3hcDzv3067Y/8NRgO5dA==' type='text/css' media='all' />
+<link rel='stylesheet' href='./assets/bootstrap-3.3.5-dist/css/bootstrap.min.css' type="text/css" />
+<link rel='stylesheet' id='all-css-0' href='./assets/recipe/recipeStyle.css' type='text/css' media='all' />
+
 <link rel='stylesheet' id='screen-css-1' href='https://s0.wp.com/wp-content/themes/premium/melody/inc/fontawesome/font-awesome.css?m=1440624119g' type='text/css' media='screen' />
 <link rel='stylesheet' id='melody-fonts-css'  href='https://fonts.googleapis.com/css?family=Muli%3A+300%2C+400%2C+300italic%7CLibre+Baskerville%3A400%2C700%2C400italic%7CLora%3A400italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
 <link rel='stylesheet' id='all-css-4' href='https://s2.wp.com/_static/??-eJx9i1EKgCAQRC+ULVZUP9FZSkxWdDfS6PoZQhREP8MbZh4cq1BMUVMEv4vV7QYpgPZsMWepQigAgThieoYb8vDtG83CsZoiMr2KWNyE25+66dmxSWggvR71kkY/yKZuu76uemlPbpZFwA==' type='text/css' media='all' />
@@ -61,6 +63,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <link rel='openid.delegate' href='https://melodydemo.wordpress.com/' />
 <link rel="search" type="application/opensearchdescription+xml" href="https://melodydemo.wordpress.com/osd.xml" title="Melody" />
 <link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.com/opensearch.xml" title="WordPress.com" />
+
 <meta name="application-name" content="Melody" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A theme with rhythm and harmony." /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://melodydemo.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Melody on WordPress.com" />
 <meta name="description" content="A theme with rhythm and harmony." />
 <style type="text/css" id="syntaxhighlighteranchor"></style>
@@ -137,28 +140,35 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		</nav><!-- #site-navigation -->
 
 	</header><!-- #masthead -->
-
-        <table width="200" height="400" border="1">
-            <tr>
-                <td>								
-				<center><img width="300" height="200" src="./img/cook1.JPG"/></center><p>
-                    <center>간장떡볶이</center>
-                </td>
-                <td>								
-				<img width="300" height="200" src="./img/cook2.JPG"/><p>
-                    <center>라볶이</center>
-                </td>
-                <td>								
-				<img width="300" height="200" src="./img/cook3.jpg"/><p>
-                    <center>명란오일파스타</center>
-                </td>
-                <td>								
-				<img width="300" height="200" src="./img/cook4.JPG"/><p>
-                    <center>토마토파스타</center>
-                </td>
-            </tr>
-        </table>
-
+                
+<!--  start food table -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table>
+                <tr>
+                    <td class="col-md-3">								
+                    <img class="recipeImg" src="./img/cook1.JPG"/>
+                        <div class="recipeText">간장떡볶이</div>
+                    </td>
+                    <td class="col-md-3">								
+                    <img class="recipeImg" src="./img/cook2.JPG"/>
+                        <div class="recipeText">라볶이</div>
+                    </td>
+                    <td class="col-md-3">								
+                    <img class="recipeImg" src="./img/cook3.jpg"/>
+                        <div class="recipeText">명란오일파스타</div>
+                    </td>
+                    <td class="col-md-3">								
+                    <img class="recipeImg" src="./img/cook4.JPG"/>
+                        <div class="recipeText">토마토파스타</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!--  end food table -->
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
