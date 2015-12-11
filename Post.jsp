@@ -7,7 +7,7 @@
 	
 	String id = request.getParameter("id");
 	String passwd = request.getParameter("password");
-	String name2 = request.getParameter("name");
+	String name = request.getParameter("name");
 	String e_mail = request.getParameter("email");
 	
    if(mem_id == null){
@@ -38,7 +38,7 @@
 
  stmt = conn.createStatement();
  int count=0;
-  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
+  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+mem_id+"'");
  
 		
 		
@@ -46,7 +46,7 @@
 			while(rs.next()){
 			id = rs.getString("id");
             passwd = rs.getString("passwd");
-            name2 = rs.getString("name");
+            name = rs.getString("name");
             e_mail = rs.getString("e_mail");
 			}
 		 }
@@ -180,12 +180,12 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
    <table border=0 width=60% align=center>
     <tr>
      <td width=10%>성 명</td>
-     <td width=90% align=left><input type=text name=name size=10 maxlength=30 ></td>
+     <td width=90% align=left><input type=text name=name value="<%=name%>" size=10 maxlength=30 readonly=readonly></td>
 	 <!--<td width=90%><input type=text name=name size=10 maxlength=8 value=<%=id%> readonly=readonly> </td> -->
     </tr>
     <tr>
 	 <td width=10% >E-Mail</td>
-	 <td width=50% align=left><input type=text name=email size=30 maxlength=30 ></td>
+	 <td width=50% align=left><input type=text name=email value="<%=e_mail%>" size=30 maxlength=30 readonly=readonly></td>
     </tr>
     <tr>
      <td width=10%>홈페이지</td>
