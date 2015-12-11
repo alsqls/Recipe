@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 <%@ page import="ch12.*"%>
-
+<%
+    String mem_id = (String)session.getAttribute("idKey");
+%>
 <jsp:useBean id="myDB" class="ch12.BoardMgr" />
 <jsp:useBean id="utilMgr" class="ch12.UtilMgr"/>
 <%
@@ -180,7 +182,18 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
 			<ul id="primary-menu" class="menu">
-                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./login.jsp">Logout</a></li>
+                <%  
+               if(mem_id != null){
+            %>
+                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
+                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./profile.jsp">Profile</a></li>
+            <%
+               }else{
+            %>
+               <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
+            <%
+               }
+            %>
                 <li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
                 <!--<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
             </ul>	
