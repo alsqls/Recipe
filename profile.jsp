@@ -67,7 +67,7 @@
 				<center>
 				<button	onclick="inputCheck();" type="button">수정</button>
 				<button	onclick="cancel();" type="button">취소</button>
-                 <button type="button"><a href=./DeleteInfo.jsp>탈퇴</a></button>
+                 <button type="button" onclick="deleteCheck();">탈퇴</button>
                 </center>
 			</form>
 		</div>
@@ -126,6 +126,13 @@
 		var result = window.confirm("회원 정보 페이지에서 나가시겠습니까?");
 		if (result) {//true
             location.href = "./index.jsp";
+		}
+	}
+    function deleteCheck() {
+		//확인창 띄워서 예 누르면 닫기
+		var result = window.confirm("정말 회원 탈퇴를 하시겠습니까?");
+		if (result) {//true
+            location.href = "./DeleteInfo.jsp";
 		}
 	}
 </script>

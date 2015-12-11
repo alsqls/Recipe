@@ -11,16 +11,17 @@
 	String passwd = request.getParameter("password");
 	String name = request.getParameter("name");
 	String e_mail = request.getParameter("e_mail");
-
-	String memberId = (String)session.getAttribute("memID");
+    
+	String memberId = (String)session.getAttribute("idKey");
 	try{
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
 		stmt = conn.createStatement();
-   
+        stmt.executeUpdate("delete from member where id='"+memberId+"'");
+   /*
    boolean check = myDB.deleteMember(id,passwd);
    if(check==true) session.invalidate();
    
-   /*
+   
    if(!id.equals("admin"))
 		myDB.deleteMember(id,passwd);
    
@@ -30,17 +31,17 @@
 				id = rs.getString("id");
 			 }
 		 }
-   
-		 stmt.executeUpdate("delete from member where id = '"+memberId+"';");
+   */
+		 
    
 		 session.invalidate();
-   */
+   
    
     %>
 		 
 	<script>
 		alert("탈퇴가 완료되었습니다.");
-		 location.href="./login.jsp";
+		 location.href="./index.jsp";
 	</script>
 <%
 	}catch(SQLException sqlException){
