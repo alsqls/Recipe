@@ -272,8 +272,7 @@ function list(){ //목록
 <table align=center border=0 width=80%>
  <tr>
 <td colspan="2"><a align=right href="./List.jsp"><input type="button" value="공유게시판"></a></td>
- 
-     <td align=left><a  href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
+<td align=left><a  href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
  </tr>
 </table>    
 <table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >
@@ -363,13 +362,11 @@ for (int i = 0; i < pagePerBlock; i++) { %>
   <td align=right> 
       <script language="javascript">
 	var memberId = "<%=memberId%>";
-		if(memberId == "admin"){
-            <a href="Post.jsp" > 글쓰기 </a>
-            
+          if(memberId == "admin"){
+        location.href="Post.jsp"; 
         }
 </script>
-   
- || <a href="javascript:list()"> 처음으로</a> 
+      <a href="Post.jsp"> 글쓰기</a> || <a href="javascript:list()"> 처음으로</a> 
   </td>
  </tr>
 </table><br>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 <%
-	request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("utf-8");
 	String memberId = (String)session.getAttribute("memID");
 	session.setMaxInactiveInterval(1000);
 %>

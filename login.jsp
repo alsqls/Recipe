@@ -15,8 +15,6 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Material Login Form</title>
-    
     
     <link rel="stylesheet" href="css/reset.css">
 
@@ -38,7 +36,7 @@
 <div class="pen-title">
   <h1>Login</h1>
 </div>
-<div class="rerun"><a href="">Rerun Pen</a></div>
+<div class="rerun"><a href="">Rerun Pen</a>  <a href="./index.jsp">Home</a></div>
 
 <div class="container">
   <div class="card"></div>

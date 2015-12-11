@@ -1,7 +1,7 @@
-﻿<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ch12.*"%>
 <%
-  request.setCharacterEncoding("euc-kr");
+  request.setCharacterEncoding("utf-8");
 %>
 <jsp:useBean id="myBoard" class="ch12.BoardBean" />
 <jsp:setProperty name="myBoard" property="*" />

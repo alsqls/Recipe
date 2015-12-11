@@ -67,6 +67,7 @@
 				<center>
 				<button	onclick="inputCheck();" type="button">수정</button>
 				<button	onclick="cancel();" type="button">취소</button>
+                 <button type="button"><a href=./DeleteInfo.jsp>탈퇴</a></button>
                 </center>
 			</form>
 		</div>

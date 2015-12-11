@@ -127,7 +127,6 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 	</header><!-- #masthead -->
 
-        <img width="8000" height="800" src=./img/meal1.jpg />	
         <table width="200" height="400" border="1">
             <tr>
                 <td>								
@@ -135,16 +134,16 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                     <center>간장떡볶이</center>
                 </td>
                 <td>								
-				<img width="300" height="200" src="./img/cook1.JPG"/><p>
-                    <center>간장떡볶이</center>
+				<img width="300" height="200" src="./img/cook2.JPG"/><p>
+                    <center>라볶이</center>
                 </td>
                 <td>								
-				<img width="300" height="200" src="./img/cook1.JPG"/><p>
-                    <center>간장떡볶이</center>
+				<img width="300" height="200" src="./img/cook3.jpg"/><p>
+                    <center>명란오일파스타</center>
                 </td>
                 <td>								
-				<img width="300" height="200" src="./img/cook1.JPG"/><p>
-                    <center>간장떡볶이</center>
+				<img width="300" height="200" src="./img/cook4.JPG"/><p>
+                    <center>토마토파스타</center>
                 </td>
             </tr>
         </table>

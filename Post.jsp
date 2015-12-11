@@ -18,7 +18,7 @@
     </script>
 <%
 	}
-  request.setCharacterEncoding("euc-kr");
+  request.setCharacterEncoding("utf-8");
    Class.forName("org.gjt.mm.mysql.Driver");
    
    Connection conn = null;
