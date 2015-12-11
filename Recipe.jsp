@@ -1,7 +1,8 @@
-<%@ page contentType="text/html;charset=utf-8" import="java.sql.*" %>
+<%@ page contentType="text/html;charset=utf-8" import="java.sql.*,java.util.*,ch12.*" %>
 <%request.setCharacterEncoding("utf-8");%>
 <%
     String mem_id = (String)session.getAttribute("idKey");
+    request.setCharacterEncoding("utf-8");
 %>
 
 <%
@@ -142,28 +143,52 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 	</header><!-- #masthead -->
                 
 <!--  start food table -->
+<jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
+<jsp:useBean id="RecipeDAO" class="ch12.RecipeDAO"/>
+<%
+   Vector<RecipeDTO> list = new Vector<RecipeDTO>();
+    list = RecipeDAO.getRecipeList();
+    int vectorSize = list.size();
+%>
+                
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <table>
+<%
+   for(int i = 0;i< vectorSize;i++){
+        RecipeDTO = (RecipeDTO)list.get(i);
+        if(i%4 == 0){
+%>
                 <tr>
+<%
+        }
+%>        
                     <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook1.JPG"/>
-                        <div class="recipeText">간장떡볶이</div>
+                    <img class="recipeImg" src="<%=RecipeDTO.getImgpath()%>"/>
+                        <div class="recipeText"><%=RecipeDTO.getCookname()%></div>
                     </td>
-                    <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook2.JPG"/>
+<%
+        if(i%4 == 3){
+%>
+                </tr>
+<%
+        }
+   }
+%>
+                    <!--<td class="col-md-3">								
+                    <img class="recipeImg" src="./img/cook1.JPG"/>
                         <div class="recipeText">라볶이</div>
                     </td>
                     <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook3.jpg"/>
+                    <img class="recipeImg" src="./img/cook2.jpg"/>
                         <div class="recipeText">명란오일파스타</div>
                     </td>
                     <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook4.JPG"/>
+                    <img class="recipeImg" src="./img/cook3.JPG"/>
                         <div class="recipeText">토마토파스타</div>
                     </td>
-                </tr>
+                </tr>-->
             </table>
         </div>
     </div>

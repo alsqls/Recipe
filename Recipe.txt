@@ -12,17 +12,13 @@ create table recipe(
 num		int(10) not null primary key auto_increment,
 cookname	varchar(20) not null,
 ingredient	varchar(300) null,
-seasoned		varchar(100) null,
+seasoned	varchar(100) null,
 recipe		varchar(2000) null,
-cookimg		varchar(200) null
-);
+imgpath		varchar(200) null,
+rate		int(10)		null
+)charset=utf8;
 -----------------------------------------------------------------------------
 
-insert into recipe(num, cookname, ingredient, seasoned, recipe, cookimg)
-values('간장떡볶이' , '떡국떡300g , 쇠고기 100g , 다진마늘, 참기름 1작은술씩 , 양파 1/3 , 스위트콘30g , 소금 후추 약간'
-, '간장5큰술 , 설탕 2큰술, 다진파, 참기름 1큰술씩, 다진마늘 1 작은술, 깨, 소금, 후추 조금,물 1/2컵' 
-,''
-);
 간장떡볶이
 재료: 떡국떡300g , 쇠고기 100g , 다진마늘, 참기름 1작은술씩 , 양파 1/3 , 스위트콘30g , 
 	소금 후추 약간
@@ -42,3 +38,19 @@ values('간장떡볶이' , '떡국떡300g , 쇠고기 100g , 다진마늘, 참기름 1작은술씩 , �
 3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다.
 4. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.
 </div>
+
+==================================================================================================
+// 레시피 추가 쿼리
+// num은 auto_increment 이므로 insert 하지 않는다.
+
+insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
+"간장 떡볶이",
+"떡국떡300g, 쇠고기 100g, 다진마늘, 참기름 1작은술씩, 양파 1/3, 스위트콘30g, 소금 후추 약간",
+"간장5큰술, 설탕 2큰술, 다진파, 참기름 1큰술씩, 다진마늘 1 작은술, 깨, 소금, 후추 조금, 물 1/2컵",
+"1. 쇠고기는 먹기 좋게 자르고 마늘, 참기름 , 소금, 후춧가루로 밑간한다.
+2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.
+3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다.
+4. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.",
+"./img/cook0.JPG",
+0
+);
