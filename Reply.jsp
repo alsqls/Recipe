@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*"%>
 <jsp:useBean id="myDB" class="ch12.BoardMgr"/>
 <%
@@ -10,7 +10,7 @@
 %>
 <html>
 <head> <title>JSPBoard</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link rel='stylesheet' id='all-css-0' href='./css/cssStyle.css' type='text/css' media='all' />
 </head>
 <body>
 <center>
@@ -59,14 +59,14 @@
      <td width=80%>
 	  <input type=password name=pass size=15 maxlength=15></td> 
     </tr>
-    <tr>
-     <td colspan=2 height=5><hr size=1></td>
-    </tr>
 	<tr> 
      <td colspan=2>
+         <center>
 	  <input type=submit value="답변등록" >
       <input type=reset value="다시쓰기">
-      <input type=button value="뒤로" onClick="history.go(-1)"></td>
+      <input type=button value="뒤로" onClick="history.go(-1)">
+             </center>
+             </td>
     </tr> 
    </table>
   </td>

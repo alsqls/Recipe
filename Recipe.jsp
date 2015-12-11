@@ -131,10 +131,9 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
         <table width="200" height="400" border="1">
             <tr>
                 <td>								
-				<img width="300" height="200" src="./img/cook1.JPG"/><p>
+				<center><img width="300" height="200" src="./img/cook1.JPG"/></center><p>
                     <center>간장떡볶이</center>
                 </td>
-                
                 <td>								
 				<img width="300" height="200" src="./img/cook1.JPG"/><p>
                     <center>간장떡볶이</center>
