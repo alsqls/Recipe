@@ -152,17 +152,20 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                 
 <!--                RECIPE INPUT                -->
                 
-                
-                
-                
+              
+
+    
 <%
    String num = request.getParameter("num");
+   int number = Integer.parseInt(num);
    num = "./cook"+num+".jsp";
 %>
+
                 
                 
-                
-  <jsp:include page="<%=num%>"/>
+<jsp:include page="<%=num%>"/>
+
+
                 
                 
                 

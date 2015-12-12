@@ -143,8 +143,9 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 	</header><!-- #masthead -->
                 
 <!--  start food table -->
-<jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
 <jsp:useBean id="RecipeDAO" class="ch12.RecipeDAO"/>
+<jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
+
 <%
    Vector<RecipeDTO> list = new Vector<RecipeDTO>();
     list = RecipeDAO.getRecipeList();
