@@ -51,7 +51,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.
 3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다.
 4. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.",
-"./img/cook0.jpg",
+"https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook0.jpg",
 0
 );
 
@@ -64,7 +64,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 2. 끓는 물에 라면을 꼬들꼬들하게 삶은 후 찬물에 헹궈 건진다.
 3. 펜에 식용유를 두르고 야채와 양념장을 넣어 볶다가 물을 넣어 한소끔 끓인다. 
 4. 떡, 어묵, 라면 사리를 넣어 한 번 더 끓여 완성한다.",
-"./img/cook1.jpg",
+"https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook1.jpg",
 0
 );
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
@@ -75,7 +75,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 2. 마늘을 얇게 납작 썰고, 명란젓은 투명한 막을 제거한다.
 3. 중약 불로 달군 팬에 올리브유를 적당량 두르고 마늘과 페퍼로치노를 넣고 볶아 향이 올라오면 명란젓을 넣어 덩어리지지 않게 볶는다.
 4. 명란젓이 거의 풀리면 파스타면을 넣고 후추를 뿌려가며 볶다 마지막에 면수(면 삶은 물)을 넣어 볶는다.",
-"./img/cook2.jpg",
+"https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook2.jpg",
 0
 );
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
@@ -87,7 +87,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 3. 끓는 물에 소금을 넣고 파스타면을 7분동안 삶는다.
 4. 팬에 올리브유를 두르고 양파와 마늘을 볶다가 방울토마토와 으깬 토마토를 넣고 10분 정도 은근하게 끓여 소금, 후추로 간하고 다진 바질과 파슬리를 넣는다.
 5. 소스의 농도가 맞으면 삶은 면을 건져 넣고 앞뒤로 흔들며 잘 섞어 접시에 담고 치즈가루와 바질잎으로 장식한다.",
-"./img/cook3.jpg",
+"https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook3.jpg",
 0
 );
 
