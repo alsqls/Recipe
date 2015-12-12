@@ -351,10 +351,14 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 <%} %>
   </td> 
   <td align=right> 
-      <% if(memberId== "admin") { %> 
-       <a href="Post.jsp"> 글쓰기</a>
-              <%} %>
-                  || <a href="javascript:list()"> 처음으로</a> 
+      <% 
+         if(mem_id.equals("admin")){
+         %>
+      <a href="./Post.jsp"> 글쓰기</a> 
+          <%
+             }
+             %>
+          || <a href="javascript:list()"> 처음으로</a> 
   </td>
  </tr>
 </table><br>
