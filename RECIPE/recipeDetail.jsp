@@ -196,9 +196,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                 <tr>
                     <td><h3>만드는 법</h3></td>
                 </tr>
-                <tr>
-                    <td class="recipe"><%=RecipeDTO.getRecipe()%></td>
-                </tr>
+                <%=RecipeDTO.getRecipe()%>
             </table>
         </div>
     </div>
