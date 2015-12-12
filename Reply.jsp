@@ -27,27 +27,22 @@
    <table border=0>
     <tr>
      <td width=20%>성 명</td>
-     <td width=80%>
-	  <input type=text name=name size=30 maxlength=20></td>
+     <td align=left width=80%><input type=text name=name size=30 maxlength=20></td>
     </tr>
     <tr>
      <td width=20%>E-Mail</td>
-     <td width=80%>
-	  <input type=text name=email size=30 maxlength=30></td>
+     <td align=left width=80%><input type=text name=email size=30 maxlength=30></td>
     </tr>
     <tr>
      <td width=20%>홈페이지</td>
-     <td width=80%>
-	  <input type=text name=homepage size=40 maxlength=30></td>
+     <td align=left width=80%><input type=text name=homepage size=40 maxlength=30></td>
     </tr>
     <tr>
      <td width=20%>제 목</td>
-     <td width=80%>
-	  <input type=text name=subject size=50 value="답변 : <%=subject%>" maxlength=50></td> 
+     <td align=left width=80%><input type=text name=subject size=50 value="답변 : <%=subject%>" maxlength=50></td> 
     </tr>
 	<tr>
-     <td width=20%>내 용</td>
-     <td width=80%>
+     <td align=left width=20%>내 용</td><td width=80%>
 	  <textarea name=content rows=12 cols=50>
       <%=content %>
 
@@ -56,8 +51,7 @@
     </tr>
     <tr>
      <td width=20%>비밀 번호</td> 
-     <td width=80%>
-	  <input type=password name=pass size=15 maxlength=15></td> 
+     <td align=left width=80%><input type=password name=pass size=15 maxlength=15></td> 
     </tr>
 	<tr> 
      <td colspan=2>

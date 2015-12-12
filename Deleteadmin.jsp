@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 
-<jsp:useBean id="myDB" class="ch12.BoardMgr" />
+<jsp:useBean id="myDB" class="ch12.BoardMgr1" />
 <%
 	String memberId = (String)session.getAttribute("memID");
     String mem_id = (String)session.getAttribute("idKey");

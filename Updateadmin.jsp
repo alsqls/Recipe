@@ -98,7 +98,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 				}
 			</style>
     
-       
+ </head>      
 <body class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
 <div id="page" class="hfeed site">
 	<!--<a class="skip-link screen-reader-text" href="#content">Skip to content</a>-->
@@ -142,25 +142,9 @@ function list(){
  	document.list.submit();
  } 
 </script>
-    
-<script>
-	function check() {
-		if(mem_id != "admin"){
-			if (document.form.pass.value == "") {
-				alert("수정을 위해 패스워드를 입력하세요.");
-				form.pass.focus();
-				return false;
-			}
-		}
-	   
-	   document.form.submit();
-	}
-</script>
-</head>
 <center>
 <br><br>
-
-<form name=form method=post action="Updatadminjsp" >
+<form name=form method=post action="UpdateProcadmin.jsp" >
 <table width=70% cellspacing=0 cellpadding=7>
  <tr>
   <td align=center>
@@ -188,7 +172,7 @@ function list(){
 	<tr>
      <td colspan=2>
          <center>
-	  <input type=Button value="수정완료" onClick="check()">
+	  <input type=submit value="수정완료">
       <input type=reset value="다시수정"> 
       <input type=button value="뒤로" onClick="history.go(-1)">
          </center>

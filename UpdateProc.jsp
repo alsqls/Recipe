@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String memberId = (String)session.getAttribute("memID");
+    String mem_id = (String)session.getAttribute("idKey");
 	session.setMaxInactiveInterval(1000);
 %>
 <jsp:useBean id="updateBoard" class="ch12.BoardBean"/>
@@ -14,7 +15,7 @@
 	BoardBean tempBoard = myDB.getBoard(num);
 	String inputPass = updateBoard.getPass(); 
 	String storePass = tempBoard.getPass(); 
-	if(!memberId.equals("admin")){
+	if(!mem_id.equals("admin")){
 		if (!inputPass.equals(storePass)) {
 %>
 <script language="javascript">

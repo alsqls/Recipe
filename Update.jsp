@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
 <%
-    String mem_id = (String)session.getAttribute("idKey");
 %>
 <jsp:useBean id="myDB" class="ch12.BoardMgr" />
 <% 
 	String memberId = (String)session.getAttribute("memID");
+   String mem_id = (String)session.getAttribute("idKey");
 	session.setMaxInactiveInterval(1000);
 	int nowPage = Integer.parseInt(request.getParameter("page")); //페이지번호
 	int num = Integer.parseInt(request.getParameter("num")); //글번호
@@ -142,8 +142,7 @@ function list(){
  	document.list.submit();
  } 
 </script>
-    
-<script>
+ <script language="javascript">
 	var memberId = "<%=memberId%>";
 	function check() {
 		if(memberId != "admin"){
@@ -189,7 +188,7 @@ function list(){
 	<tr>
      <td colspan=2>
          <center>
-	  <input type=Button value="수정완료" onClick="check()">
+	  <input type=button value="수정완료" onClick="check()">
       <input type=reset value="다시수정"> 
       <input type=button value="뒤로" onClick="history.go(-1)">
          </center>
@@ -215,8 +214,7 @@ function list(){
             </div>
         </div>
 <!-- Footer Block Center -->
-            <div class="footer-block footer-widget-area element-height" role="complementary">
-				rrr			
+            <div class="footer-block footer-widget-area element-height" role="complementary">	
             </div>	
 				
 			<!-- Footer Block Right -->

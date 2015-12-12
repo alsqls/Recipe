@@ -217,7 +217,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
     </tr>
     <tr>
      <td colspan="2">
-         <center><input type=submit value="등록" onclick="inputCheck()" >
+         <center><input type=button value="등록" onclick="inputCheck()" >
          <input type=reset value="다시쓰기">
          </center>
      </td>
