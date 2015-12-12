@@ -1,122 +1,92 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="ch12.*,java.util.*,java.sql.*"%>
-<jsp:useBean id="myDB" class="ch12.BoardMgr1" />
+<%@ page import="ch12.*"%>
 <%
     String mem_id = (String)session.getAttribute("idKey");
 %>
+<jsp:useBean id="myDB" class="ch12.BoardMgr1" />
+<jsp:useBean id="utilMgr" class="ch12.UtilMgr"/>
 <%
-	String memberId = (String)session.getAttribute("memID");
-	session.setMaxInactiveInterval(1000);
+	int num = Integer.parseInt(request.getParameter("num"));
+	int nowPage = Integer.parseInt(request.getParameter("page"));
+	String keyField = request.getParameter("keyField"); 
+    String keyWord = request.getParameter("keyWord");
 	
-	/*
-	Cookie[] cookies = request.getCookies(); 
-	if(cookies!=null){ 
-		String cookieName = request.getRemoteAddr();
-		Cookie cookie = new Cookie(cookieName, "0");
-		cookie.setMaxAge(60);
+	Cookie[] cookies = request.getCookies(); //쿠키생성
+	
+	
+	boolean ii = false;
+	
+	cookies = request.getCookies(); 
+	
+	if(cookies.length>0){ //배열에 쿠키가 있다면
+		for(int i =0; i<cookies.length;i++){
+			if(cookies[i].getName().equals(String.valueOf(num))){ //글의 넘버와 같은게 존재
+				ii = true;
+				String cookieName = String.valueOf(num); //num의 value를 가진 cookie 새로 할당
+				Cookie cookie = new Cookie(cookieName, "1"); //1 로 해서 
+				cookie.setMaxAge(86400); //세션 하루동안 유지
+				cookie.setValue("1"); //1 : 조회수 올라감 0:조회수 안올라감 
+				response.addCookie(cookie); 
+			}
+		}
+	}
+	
+	if(cookies.length == 0){ //쿠키배열에 쿠키가 없다면
+		String cookieName = String.valueOf(num); // 쿠키 할당
+		Cookie cookie = new Cookie(cookieName, "1"); 
+		cookie.setMaxAge(86400); 
+		cookie.setValue("1");
 		response.addCookie(cookie); 
 	}
-	*/
 	
-	String id = request.getParameter("id");
-	String passwd = request.getParameter("password");
-	String name2 = request.getParameter("name");
-	String e_mail = request.getParameter("email");
-
-  request.setCharacterEncoding("utf-8");
-   Class.forName("org.gjt.mm.mysql.Driver");
-   
-   Connection conn = null;
-   
-  
-   Statement stmt = null;
-   ResultSet rs = null;
-    try{
-      
-   //커넥션 생성
-   conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","multi");
-   
-   // 커넥션을 통해 질의를 전송하기 위한 객체(stmt)
-   // stmt = conn.createStatement();
-   // 객체(stmt)를 통해서 질의를 수행할 메소드를 사용
-   // 질의수행 결과는 ResultSet으로 받는다.
-
- stmt = conn.createStatement();
- int count=0;
-  rs = stmt.executeQuery("SELECT * FROM MEMBER WHERE id='"+memberId+"'");
- 
-		
-		
-		 if(rs!=null){
-			while(rs.next()){
-			id = rs.getString("id");
-            passwd = rs.getString("passwd");
-            name2 = rs.getString("name");
-            e_mail = rs.getString("e_mail");
+	if(ii == false){ //쿠키는 있지만 그 게시글의 num과 다르다면 조회수를 1 증가해야 함
+		String cookieName = String.valueOf(num);
+		Cookie cookie = new Cookie(cookieName, "1");
+		cookie.setMaxAge(86400);
+		cookie.setValue("1");
+		response.addCookie(cookie); 
+	}
+	cookies = request.getCookies(); 
+	
+	String tempIp="";
+	String isFirst="0";
+	
+	if(cookies.length>0){ //쿠키가 있다.
+		for(int i=0; i<cookies.length;i++){ 
+			if(cookies[i].getName().equals(String.valueOf(num))){
+				tempIp = cookies[i].getName(); //여기서는 필요없지만 쿠키name받아오기
+				isFirst = cookies[i].getValue(); // 쿠키 value값 isFirst에 할당
 			}
-		 }
-		
-	}catch(SQLException sqlException){
-      System.out.println("sql exception");
-   }catch(Exception exception){
-      System.out.println("exception");
-   }finally{
-      if( rs != null ) 
-         try{ rs.close(); } 
-         catch(SQLException ex) {}
-      if( stmt != null ) 
-         try { stmt.close(); } 
-         catch(SQLException ex) {}
-      if( conn != null ) 
-         try{ conn.close(); }
-         catch(Exception ex){}
-   }
-%>
-<%
-   //한 page 에는 글 10개
-   //10개의 page가 하나의 1개의 Block
-   int nowPage = 0; 
-   int nowBlock = 0; 
-   int totalRecord = 0;  //게시글 총 갯수
-   int numPerPage = 10;  //한 page 에는 글 10개     
-   int totalPage = 0;       
-   int totalBlock = 0;      
-   int pagePerBlock =0;    
-   int beginPerPage =0;    
-
-   String keyField ="" ;
-   String keyWord ="" ; 
-
-   Vector boardList;
-%>
-<% 
-  
-	if(request.getParameter("keyWord") !=null){ //찾고자 하는 단어
-			keyWord =request.getParameter("keyWord");
-			keyField =request.getParameter("keyField");
 		}
-		
-	if(request.getParameter("reload") !=null){
-		if(request.getParameter("reload").equals("true")){
-			keyWord ="";
-			keyField ="";
-			}
 	}
 
-	boardList= myDB.getBoardList(keyField,keyWord); 
-	totalRecord = boardList.size(); //벡터요소 몇개지?
-	numPerPage = 10; 
-	if (request.getParameter("page") != null) { nowPage= Integer.parseInt(request.getParameter("page")); } 
-	//넘어온 페이지를 현재 페이지로 설정하겠다.(nowPage)
-	beginPerPage = nowPage * numPerPage;
-	totalPage =(int)Math.ceil((double)totalRecord / numPerPage);
-	pagePerBlock = 10; 
-	if (request.getParameter("nowBlock") != null) {nowBlock = Integer.parseInt(request.getParameter("nowBlock"));}
-	totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);
-	//글이 500개면 50 page가 나오므로 5block이 나오게 된다.
+	BoardBean tempBoard = myDB.getBoardUp(num,isFirst); // isFirst가 0과 같으면 num의 게시글 조회수 ++ 
+	
+	cookies = request.getCookies(); 
+	
+	if(cookies.length>0){
+		for(int i=0; i<cookies.length;i++){ 
+			if(cookies[i].getName().equals(String.valueOf(num))){
+				
+				String cookieName = String.valueOf(num);
+				Cookie cookie = new Cookie(cookieName, "1");
+				cookie.setMaxAge(86400);
+				cookie.setValue("1");
+				response.addCookie(cookie); 
+			}
+		}
+	}
+		
+	String name = tempBoard.getName();
+	String email = tempBoard.getEmail();
+	String homepage = tempBoard.getHomepage();
+	String subject = tempBoard.getSubject();
+	String regdate = tempBoard.getRegdate();
+	String content = tempBoard.getContent();
+	String ip = tempBoard.getIp();
+	int count= tempBoard.getCount();
 %>
-    
-    
 <html>
 <head>
 <meta charset="UTF-8">
@@ -141,7 +111,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <link rel='stylesheet' id='print-css-7' href='https://s1.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1444132114g' type='text/css' media='print' />
 <link rel='stylesheet' id='all-css-8' href='https://s0.wp.com/wp-content/themes/h4/global.css?m=1420737423g' type='text/css' media='all' />
 <script type='text/javascript' src='https://s0.wp.com/_static/??-eJyNkV1OAzEMhC9ENqC2Ah4Qr1wjzQ5ZL3GSxk6rcnoCKqqgy49kyZL9jTW27aEYSj62EWLnHruGejylYZYr+xtgmEJ1ioEpfcI+J0XSd5bzliJME1QXeq0Pes4LXMmiDJEOLXS/WqK0Jxz+xGZocf7FVAi9XkzdxhxMiS1QEjuCs5DCOK+079tcVr7rdUL3a0sFU2PLiHk8nk0M7NRPT6Aw6b+l2DUXzfQhMuIrFV26v5TzqX9+3Il65Ieb9Xq1ub1e3d/Nb7DPuNA='></script>
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://melodydemo.wordpress.com/xmlrpc.php?rsd" /> 
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress.com" />
 <link rel='shortlink' href='http://wp.me/6Eg3j' />
@@ -192,32 +162,8 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 					}
 				}
 			</style>
-
-<script>
-function check() {
-     if (document.search.keyWord.value == "") //체크
-		{
-		 alert("검색어를 입력하세요.");
-		 document.search.keyWord.focus();
-		 return;
-	    }
-	 document.search.submit();
- }
-
-function list(){ //목록
-	document.list.action="./Listadmin.jsp";
- 	document.list.submit();
- }
-
- function read(value){ //글 하나 읽는거.
-	document.read.action="Readadmin.jsp";
-	document.read.num.value=value;
-	document.read.submit();   
- }
-
-</script>
-</head>
     
+       
 <body class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
 <div id="page" class="hfeed site">
 	<!--<a class="skip-link screen-reader-text" href="#content">Skip to content</a>-->
@@ -236,8 +182,7 @@ function list(){ //목록
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fa fa-bars"></i>Menu</button>
 			<ul id="primary-menu" class="menu">
-                  <ul id="primary-menu" class="menu">
-            <%  
+                <%  
                if(mem_id != null){
             %>
                 <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
@@ -249,149 +194,87 @@ function list(){ //목록
             <%
                }
             %>
-			
                 <li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
-             <!--   <li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
+                <!--<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./Recent.jsp">Recent</a></li> -->
             </ul>	
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+<br><br>
     
-<center><br>
-    
-<h3> ※ NOTICE ※</h3><br>
-
-<table align=center border=0 width=80%>
+<script>
+function list(){
+	document.list.action="Listadmin.jsp";
+ 	document.list.submit();
+ } 
+</script>
+</head>
+<body>
+<br><br>
+<table align=center width=70% border=0 cellspacing=3 >
  <tr>
-<td colspan="2"><a align=right href="./List.jsp"><input type="button" value="공유게시판"></a></td>
-<td align=left><a  href="./index.jsp"><center><input type="button" value="HOME"></center></a></td>
- </tr>
-</table>    
-<table align=center width="80%" border=0 cellspacing=0 cellpadding=3 >
- <tr>
-  <td align=center colspan=3 >
-<% 
-   if (boardList.isEmpty()) { 
-%> 
-등록된 글이 없습니다.
-<%  }
-   else {
-%>
-   <table border=0 width=100% cellpadding=0 cellspacing=0 >
-    <tr align=center bgcolor=#FFFFFF height=120%>
-     <td>번 호</td>
-	 <td>제 목</td>
-	 <td>이 름</td>
-	 <td>날 짜</td>
-	 <td>조회수</td>
+  <td colspan=2>
+   <table border=0 cellpadding=3 cellspacing=0 width=100%> 
+    <tr colspan=2> 
+	 <td align=center bgcolor=#dddddd width=10%> 이 름 </td>
+	 <td  align=left bgcolor=#ffffe8><%=name%></td>
     </tr>
-<% 
-	for (int i = beginPerPage;i < (beginPerPage+numPerPage); i++) { 
-	if (i==totalRecord) break;
-
-	BoardBean tempBoard = (BoardBean)boardList.elementAt(i);
-	String name =tempBoard.getName();
-	String subject = tempBoard.getSubject();
-	String email = tempBoard.getEmail();
-	String regdate = tempBoard.getRegdate();
-	int depth = tempBoard.getDepth();
-	int num = tempBoard.getNum(); 
-	int count =tempBoard.getCount();
-%>
+    <tr>
+	 <td align=center bgcolor=#dddddd width=10%> 등록날짜 </td>
+	 <td align=left bgcolor=#ffffe8><%=regdate%></td>
+	</tr>
+    <tr>
+	 <td align=center bgcolor=#dddddd width=10%> 메 일 </td>
+	 <td align=left bgcolor=#ffffe8 ><a href="mailto:<%=email%>"><%=email%></a></td>
+    </tr>
+    <tr>
+	 <td align=center bgcolor=#dddddd width=10%> 홈페이지 </td>
+	 <td align=left bgcolor=#ffffe8 ><a href="http://<%=homepage%>" target="_new">http://<%=homepage%></a></td> 
+	</tr>
     <tr> 
-     <td align=center><%= totalRecord - i %></td>
-     <td>
-<%
-	if (depth > 0) { 
-	for (int re = 0; re < depth; re++) {
-%> 
-&nbsp;&nbsp;
-<% 
-	 }
-   }
-%>
-      <center><a href="javascript:read('<%=num%>')"><%= subject %></a></center>
-     </td>
-     <td align=center><a href="mailto:<%=email %>"><%= name %></a></td>
-     <td align=center><%=regdate%></td>
-     <td align=center><%=count%> </td>
-    </tr>
-<% 
-   } 
-%>
-</table> 
-<% 
-   } 
-%> 
+     <td align=center bgcolor=#dddddd> 제 목</td>
+     <td align=left bgcolor=#ffffe8 ><%=subject%> </td>
+   </tr>
+   <tr> 
+    <td colspan=4><br><%=utilMgr.getContent(content)%><br></td>
+   </tr>
+   <tr>
+    <td colspan=4 align=right>
+     <%=ip%>로 부터 글을 남기셨습니다./  조회수  <%=count%>
+    </td>
+   </tr>
+   </table>
   </td>
  </tr>
-
  <tr>
-      <td  align=left>Total : <%=totalRecord%> Articles(<font color=red><%=nowPage+1%>/<%=totalPage%>Pages</font>)</td>
-  <td align="left" > Go to Page 
-<% if(totalRecord !=0){ %> 
-<% if (nowBlock > 0) {%> 
-<a href="List.jsp?nowBlock=<%=nowBlock - 1 %>&page=<%=((nowBlock - 1) * pagePerBlock) %>">
-이전 <%=pagePerBlock %> 개</a>
-<%}%> 
-:::
-<%
-for (int i = 0; i < pagePerBlock; i++) { %>
-<a href="List.jsp?nowBlock=<%=nowBlock %>&page=<%=(nowBlock*pagePerBlock) + i %>">
-<%=(nowBlock * pagePerBlock) + i + 1 %></a>
-
-<% if ((nowBlock * pagePerBlock) + i + 1 == totalPage)  break; %>
-<%} %>
-
-
-<% if (totalBlock > nowBlock + 1) { %> 
-<a href="List.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 
-다음 <%=pagePerBlock %>개</a>
-<%}%>
-
-<%} %>
-  </td> 
-  <td align=right> 
-      <% 
-         if(mem_id.equals("admin")){
-         %>
-      <a href="./Postadmin.jsp"> 글쓰기</a> 
-          <%
-             }
-             %>
-          || <a href="javascript:list()"> 처음으로</a> 
-  </td>
- </tr>
-</table><br>
-<form action="Listadmin.jsp" name="search" method="post">
-<table border=0 width=527 align=center cellpadding=4 cellspacing=0 >
- <tr>
-  <td align=center valign=bottom>
+  <td colspan=2> 
       <center>
-   <select name="keyField" size=1>
-    <option value="name"> 이 름
-    <option value="subject"> 제 목
-    <option value="content"> 내 용
-   </select>
-   <input type="text" size=16 name="keyWord"  value="">
-   <input type="button"  value="찾기" onClick="check()">
-   <input type="hidden" name="page" value="0">
-          </center>
+	[ <a href="javascript:list()" >목 록</a>
+          <%
+          if(mem_id.equals("admin")){
+             %>
+	| <a href="Updateadmin.jsp?page=<%=nowPage%>&num=<%=num%>" >수 정</a> |
+	<a href="Deleteadmin.jsp?page=<%=nowPage%>&num=<%=num%>">삭 제</a>
+              <% } %>
+                  ]<br>
+      </center>
   </td>
  </tr>
 </table>
-</form>
-<form name="read" method="post">
-    <input type="hidden" name="num" value="">
-    <input type="hidden" name="page" value="<%=nowPage%>">
-    <input type="hidden" name="keyField" value="<%=keyField%>">
-    <input type="hidden" name="keyWord" value="<%=keyWord%>">
- </form>
+<%
+if(keyWord==null || keyWord.equals("null")){ %>
 <form name="list" method="post">
- <input type="hidden" name="reload" value="true">
- <input type="hidden" name="page" value="0">
- <input type="hidden" name="nowBlock" value="0"> 
+<input type="hidden" name="num" value="<%=num%>">
+<input type="hidden" name="page" value="<%=nowPage%>">
 </form>
-    <footer id="colophon" class="site-footer" role="contentinfo">
+<%} else{ %>
+<form name="list" method="post">
+<input type="hidden" name="num" value="<%=num%>">
+<input type="hidden" name="page" value="<%=nowPage%>">
+<input type="hidden" name="keyField" value="<%=keyField%>">
+<input type="hidden" name="keyWord" value="<%=keyWord%>">
+</form>
+<%}%>
+  <footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
 <!-- Footer Block Left -->
@@ -403,7 +286,9 @@ for (int i = 0; i < pagePerBlock; i++) { %>
             </div>
         </div>
 <!-- Footer Block Center -->
-            <div class="footer-block footer-widget-area element-height" role="complementary">	</div>	
+            <div class="footer-block footer-widget-area element-height" role="complementary">
+				rrr			
+            </div>	
 				
 			<!-- Footer Block Right -->
 								<div class="footer-block footer-widget-area element-height" role="complementary">
@@ -559,7 +444,8 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 	
 }
 </script>
-    
-</center>
+
 </body>
 </html>
+
+

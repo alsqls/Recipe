@@ -57,10 +57,9 @@
    
 if(mem_id.equals("admin")){
 	myDB.deleteBoard(num);
-	  response.sendRedirect("List.jsp?page=" + nowPage);
+	  response.sendRedirect("Listadmin.jsp?page=" + nowPage);
 	}
-rs = stmt.executeQuery("SELECT * FROM board WHERE num='"+(num+1)+"'");
-
+rs = stmt.executeQuery("SELECT * FROM boardadmin WHERE num='"+(num+1)+"'");
 
 
 if(rs!=null ) {
@@ -69,7 +68,7 @@ if(rs!=null ) {
 			}
 }
 
-//rs = stmt.executeQuery("SELECT * FROM board WHERE pos='"+(pos+1)+"'");
+//rs = stmt.executeQuery("SELECT * FROM boardadmin WHERE pos='"+(pos+1)+"'");
 //if(rs!=null){
 //			while(rs.next()){
 //			nextdepth = Integer.parseInt(rs.getString("depth"));
@@ -119,7 +118,7 @@ if(rs!=null ) {
 <%
 	}
 	  myDB.deleteBoard(num);
-	  response.sendRedirect("List.jsp?page=" + nowPage);
+	  response.sendRedirect("Listadmin.jsp?page=" + nowPage);
 		
 	}
   }
@@ -162,7 +161,7 @@ else if("<%=nextdepth%>"=="2"){
  </tr>
 </table>
 <table width=70% cellspacing=0 cellpadding=2>
-<form name=form method=post action="Delete.jsp" >
+<form name=form method=post action="Deleteadmin.jsp" >
  <tr>
   <td align=center>
    <table align=center border=0 width=91%>
