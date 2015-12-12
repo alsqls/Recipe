@@ -158,12 +158,51 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <%
    String num = request.getParameter("num");
    int number = Integer.parseInt(num);
-   num = "./cook"+num+".jsp";
 %>
 
+<jsp:useBean id="RecipeDAO" class="ch12.RecipeDAO"/>
+<jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
+    
+<%
+   RecipeDTO = RecipeDAO.getRecipe(number);
+%>
                 
-                
-<jsp:include page="<%=num%>"/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="noBorder">
+                <tr>
+                    <td class="col-md-12">
+                        <img src="<%=RecipeDTO.getImgpath()%>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       <h1 class="cookName"><%=RecipeDTO.getCookname()%></h1> 
+                    </td>
+                </tr>
+                <tr>
+                    <td><h3>재료</h3></td>
+                </tr>
+                <tr>
+                    <td><h4><%=RecipeDTO.getIngredient()%></h4></td>
+                </tr>
+                <tr>
+                    <td><h3>양념장</h3></td>
+                </tr>
+                <tr>
+                    <td><h4><%=RecipeDTO.getSeasoned()%></h4></td>
+                </tr>
+                <tr>
+                    <td><h3>만드는 법</h3></td>
+                </tr>
+                <tr>
+                    <td class="recipe"><%=RecipeDTO.getRecipe()%></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 
 
                 
