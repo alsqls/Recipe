@@ -202,7 +202,8 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 										<div class="footer-widget-area" role="complementary">
 							<aside id="text-2" class="widget widget_text"><h3 class="widget-title">About Cooking</h3>			
-                                <div class="textwidget" font-family:"NanumGothicBold">요리를 잘하지만 하지 않는 아내보다 더 참을 수 없는 유일한 것은 요리를 못하면서 하는 아내이다. <br> by 로버트 프로스트
+                                <div class="textwidget" font-family:"NanumGothicBold">요리를 잘하지만 하지 않는 아내보다 더 참을 수 없는 유일한 것은 요리를 못하면서 하는 아내이다. <br>
+                                    <hr>by 로버트 프로스트
 </div>
 		</aside>						</div>
 									</div>
