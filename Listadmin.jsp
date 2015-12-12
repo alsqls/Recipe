@@ -352,9 +352,9 @@ for (int i = 0; i < pagePerBlock; i++) { %>
   </td> 
   <td align=right> 
       <% 
-         if(id.equals("admin")){
+         if(mem_id.equals("admin")){
          %>
-      <a href="Post.jsp"> 글쓰기</a> 
+      <a href="./Post.jsp"> 글쓰기</a> 
           <%
              }
              %>
