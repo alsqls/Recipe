@@ -1,0 +1,29 @@
+.cookName{
+    text-align: center;
+    font-size: 5em;
+}
+
+#noBorder{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#noBorder td{
+    border-bottom: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#noBorder tr{
+    border-bottom: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#noBorder img{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}

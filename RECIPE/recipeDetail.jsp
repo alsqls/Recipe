@@ -32,8 +32,8 @@
 function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
 /* ]]> */
 </script>
-<link rel='stylesheet' href='./assets/bootstrap-3.3.5-dist/css/bootstrap.min.css' type="text/css" />
-<link rel='stylesheet' id='all-css-0' href='./assets/recipe/recipeStyle.css' type='text/css' media='all' />
+<link rel='stylesheet' href='../assets/bootstrap-3.3.5-dist/css/bootstrap.min.css' type="text/css" />
+<link rel='stylesheet' id='all-css-0' href='../assets/recipe/recipeStyle.css' type='text/css' media='all' />
 
 <link rel='stylesheet' id='screen-css-1' href='https://s0.wp.com/wp-content/themes/premium/melody/inc/fontawesome/font-awesome.css?m=1440624119g' type='text/css' media='screen' />
 <link rel='stylesheet' id='melody-fonts-css'  href='https://fonts.googleapis.com/css?family=Muli%3A+300%2C+400%2C+300italic%7CLibre+Baskerville%3A400%2C700%2C400italic%7CLora%3A400italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
@@ -113,7 +113,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 		<div class="siter-header-inner">
 			<div class="site-branding">
 								<div class="site-branding-text">
-                                    <h1 class="site-title"><a href=./index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
+                                    <h1 class="site-title"><a href=../index.jsp rel="home" ><p font-family: "nanumGothicBold">요리하는 사람</p></a></h1>
 										<p class="site-description">Cooking with happiness.</p>
 				</div>	
 			</div><!-- .site-branding -->
@@ -126,75 +126,60 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
             <%  
                if(mem_id != null){
             %>
-                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./logout.jsp">Logout</a></li>
-                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href="./profile.jsp">Profile</a></li>
+                <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="../logout.jsp">Logout</a></li>
+                <li id="menu-item-128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-128"><a href=".././profile.jsp">Profile</a></li>
             <%
                }else{
             %>
-               <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="./login.jsp">Login</a></li>
+               <li id="menu-item-120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-120"><a href="../login.jsp">Login</a></li>
             <%
                }
             %>
-<li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="./Recipe.jsp">Recipes</a></li>
-<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="./List.jsp">Board</a></li>
+<li id="menu-item-126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-126"><a href="../Recipe.jsp">Recipes</a></li>
+<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="../List.jsp">Board</a></li>
 </ul>	
 		</nav><!-- #site-navigation -->
 
 	</header><!-- #masthead -->
                 
-<!--  start food table -->
-<jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
-<jsp:useBean id="RecipeDAO" class="ch12.RecipeDAO"/>
+                <!--  jQuery code  -->
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
+
+                <!--   css code     -->
+<link rel='stylesheet' href='./cook.css' type='text/css'/> 
+                
+                
+<!--                RECIPE INPUT                -->
+                
+                
+                
+                
 <%
-   Vector<RecipeDTO> list = new Vector<RecipeDTO>();
-    list = RecipeDAO.getRecipeList();
-    int vectorSize = list.size();
+   String num = request.getParameter("num");
+   num = "./cook"+num+".jsp";
 %>
                 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <table>
-<%
-   for(int i = 0;i< vectorSize;i++){
-        RecipeDTO = (RecipeDTO)list.get(i);
-        if(i%4 == 0){
-%>
-                <tr>
-<%
-        }
-%>        
-                    <td class="col-md-3 recipeItem" id="<%=RecipeDTO.getNum()%>" onclick="recipeClick();">								
-                    <img class="recipeImg" src="<%=RecipeDTO.getImgpath()%>"/>
-                        <div class="recipeText"><%=RecipeDTO.getCookname()%></div>
-                    </td>
-<%
-        if(i%4 == 3){
-%>
-                </tr>
-<%
-        }
-   }
-%>
-                    <!--<td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook1.JPG"/>
-                        <div class="recipeText">라볶이</div>
-                    </td>
-                    <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook2.jpg"/>
-                        <div class="recipeText">명란오일파스타</div>
-                    </td>
-                    <td class="col-md-3">								
-                    <img class="recipeImg" src="./img/cook3.JPG"/>
-                        <div class="recipeText">토마토파스타</div>
-                    </td>
-                </tr>-->
-            </table>
-        </div>
-    </div>
-</div>
-<!--  end food table -->
-	<footer id="colophon" class="site-footer" role="contentinfo">
+                
+                
+  <jsp:include page="<%=num%>"/>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+<!--*********************************************-->
+                
+                
+                
+                <footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-footer-inner match-height">
 
 			<!-- Footer Block Left -->
@@ -369,16 +354,4 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 </script>
 </body>
 </html>
-<!--  jQuery code  -->
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
 
-<script>
-    $(document).ready(function(){
-       $('.recipeItem').on("click",function(){
-           var num = $(this).attr("id");
-           var detailPath = "./RECIPE/recipeDetail.jsp?num="+num;
-           location.href = detailPath;
-       })
-    });
-</script>
