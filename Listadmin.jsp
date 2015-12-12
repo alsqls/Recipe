@@ -352,7 +352,7 @@ for (int i = 0; i < pagePerBlock; i++) { %>
   </td> 
   <td align=right> 
       <% 
-         if(memberId== "admin"){
+         if(id.equals("admin")){
          %>
       <a href="Post.jsp"> 글쓰기</a> 
           <%
