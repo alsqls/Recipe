@@ -343,7 +343,7 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 <%} %>
 
 
-<% if (totalBlock > nowBlock + 1) {%> 
+<% if (totalBlock > nowBlock + 1) { %> 
 <a href="List.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 
 다음 <%=pagePerBlock %>개</a>
 <%}%>
@@ -351,14 +351,10 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 <%} %>
   </td> 
   <td align=right> 
-      <% 
-         if(id.equals("admin")){
-         %>
-      <a href="Post.jsp"> 글쓰기</a> 
-          <%
-             }
-             %>
-          || <a href="javascript:list()"> 처음으로</a> 
+      <% if(memberId== "admin") { %> 
+       <a href="Post.jsp"> 글쓰기</a>
+              <%} %>
+                  || <a href="javascript:list()"> 처음으로</a> 
   </td>
  </tr>
 </table><br>
