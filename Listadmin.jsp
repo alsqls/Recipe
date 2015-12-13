@@ -330,13 +330,13 @@ function list(){ //목록
   <td align="left" > Go to Page 
 <% if(totalRecord !=0){ %> 
 <% if (nowBlock > 0) {%> 
-<a href="List.jsp?nowBlock=<%=nowBlock - 1 %>&page=<%=((nowBlock - 1) * pagePerBlock) %>">
+<a href="Listadmin.jsp?nowBlock=<%=nowBlock - 1 %>&page=<%=((nowBlock - 1) * pagePerBlock) %>">
 이전 <%=pagePerBlock %> 개</a>
 <%}%> 
 :::
 <%
 for (int i = 0; i < pagePerBlock; i++) { %>
-<a href="List.jsp?nowBlock=<%=nowBlock %>&page=<%=(nowBlock*pagePerBlock) + i %>">
+<a href="Listadmin.jsp?nowBlock=<%=nowBlock %>&page=<%=(nowBlock*pagePerBlock) + i %>">
 <%=(nowBlock * pagePerBlock) + i + 1 %></a>
 
 <% if ((nowBlock * pagePerBlock) + i + 1 == totalPage)  break; %>
@@ -344,7 +344,7 @@ for (int i = 0; i < pagePerBlock; i++) { %>
 
 
 <% if (totalBlock > nowBlock + 1) { %> 
-<a href="List.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 
+<a href="Listadmin.jsp?nowBlock=<%=nowBlock + 1 %>&page=<%=((nowBlock + 1) * pagePerBlock) %>"> 
 다음 <%=pagePerBlock %>개</a>
 <%}%>
 
@@ -375,7 +375,7 @@ for (int i = 0; i < pagePerBlock; i++) { %>
    <input type="text" size=16 name="keyWord"  value="">
    <input type="button"  value="찾기" onClick="check()">
    <input type="hidden" name="page" value="0">
-          </center>
+    </center>
   </td>
  </tr>
 </table>
