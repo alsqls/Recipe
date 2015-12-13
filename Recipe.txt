@@ -17,6 +17,12 @@ recipe		varchar(2000) null,
 imgpath		varchar(200) null,
 rate		int(10)		null
 )charset=utf8;
+
+// 좋아요 테이블
+create table liked(
+num		int(10) not null,
+id		varchar(20) not null
+)charset=utf8;
 -----------------------------------------------------------------------------
 
 간장떡볶이

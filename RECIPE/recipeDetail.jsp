@@ -167,7 +167,8 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 <jsp:useBean id="RecipeDAO" class="ch12.RecipeDAO"/>
 <jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
-    
+<jsp:useBean id="LikedDAO" class="ch12.LikedDAO"/>
+<jsp:useBean id="LikedDTO" class="ch12.LikedDTO"/>
 <%
    RecipeDTO = RecipeDAO.getRecipe(number);
 %>
@@ -180,6 +181,39 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                     <td class="col-md-12">
                         <img src="<%=RecipeDTO.getImgpath()%>"/>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+<%
+    if(true){
+                        if(LikedDAO.isLike(Integer.toString(RecipeDTO.getNum()),mem_id)){  // false 면 좋아요 선택한 상태 true 면 좋아요 선택 안한 상태
+%>
+                        <form method="post" name="button" action="./like.jsp">
+                            <button class="like" onclick="likeClick();" value="좋아요">좋아요하기</button>
+                            <input type="hidden" name="num" value="<%=RecipeDTO.getNum()%>"/>
+                        </form>
+<%
+                        }else{
+%>
+                        
+                            <button class="notlike" onclick="likeClick();" value="좋아요">좋아요</button>
+                            <input type="hidden" name="num" value="<%=RecipeDTO.getNum()%>"/>
+                        
+<%
+                        }
+%>
+<script language="java">
+   function likeClick(){
+       document.button.submit();
+   }
+    
+</script>
+<%
+   }
+%>
+                    </td>
+                <tr>
+                    <td><%=RecipeDTO.getRate()%></td>
                 </tr>
                 <tr>
                     <td><h1 class="cookName">* <%=RecipeDTO.getCookname()%></h1></td>
@@ -199,6 +233,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
         </div>
     </div>
 </div>
+
 
                
                 
