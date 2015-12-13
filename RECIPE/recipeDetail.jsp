@@ -102,7 +102,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-search-form">
-			<form role="search" method="get" class="search-form" action="./Recipe.jsp">
+			<form role="search" method="get" class="search-form" action="../Recipe.jsp">
                 <select name="keyField" size=1 class="keyFields">
                     <option value="name"> 이 름
                     <option value="ingredient"> 재 료
