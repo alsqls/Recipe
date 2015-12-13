@@ -26,7 +26,7 @@ rate		int(10)		null
 물 1/2컵
 
 만드는법
-쇠고기는 먹기 좋게 자르고 마늘, 참기름 , 소금, 후춧가루로 밑간한다. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.
+쇠고기는 먹기 좋게 자르고 마늘, 참기름 , 소금, 후춧가루로 밑간한다. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국 떡을 넣고 양념장을 넣어 볶는다. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.
 
 
 
@@ -34,9 +34,9 @@ rate		int(10)		null
 
 만드는법
 1. 쇠고기는 먹기 좋게 자르고 마늘, 참기름 , 소금, 후춧가루로 밑간한다.
-2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.
-3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다.
-4. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.
+2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채 썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.
+3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국 떡을 넣고 양념장을 넣어 볶는다.
+4. 떡에 양념이 배면 양파, 스위트 콘을 넣어 살짝 볶아 완성한다.
 </div>
 
 ==================================================================================================
@@ -45,10 +45,10 @@ rate		int(10)		null
 
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 "간장 떡볶이",
-"떡국떡300g, 쇠고기 100g, 다진마늘, 참기름 1작은술씩, 양파 1/3, 스위트콘30g, 소금 후추 약간",
+"떡국떡300g, 쇠고기 100g, 다진 마늘, 참기름 1작은술씩, 양파 1/3, 스위트콘30g, 소금 후추 약간",
 "간장5큰술, 설탕 2큰술, 다진파, 참기름 1큰술씩, 다진마늘 1 작은술, 깨, 소금, 후추 조금, 물 1/2컵",
 "<tr class='recipeList'><td>1. 쇠고기는 먹기 좋게 자르고 마늘, 참기름 , 소금, 후춧가루로 밑간한다.</td></tr>
-<tr class='recipeList'><td>2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.</td></tr>
+<tr class='recipeList'><td>2. 떡국떡은 흐르는 물에 씻어 건지고, 양파는 채 썬다. 통조림 스위트콘은 물에 살살 씻은 후 채반에 밭쳐 물기를 뺀다.</td></tr>
 <tr class='recipeList'><td>3. 팬에 쇠고기를 넣어 볶다가 고기가 익으면 떡국떡을 넣고 양념장을 넣어 볶는다.</td></tr>
 <tr class='recipeList'><td>4. 떡에 양념이 배면 양파, 스위트콘을 넣어 살짝 볶아 완성한다.</td></tr>",
 "https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook0.jpg",
@@ -58,7 +58,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 "라볶이",
-"떡볶이떡 200g, 납작 어묵1장, 양배추 1/8통, 양파 1/2개 , 대파 1/3개, 라면사리 1개, 물1컵",
+"떡볶이떡 200g, 어묵 1장, 양배추 1/8통, 양파 1/2개 , 대파 1/3개, 라면사리 1개, 물1컵",
 "고추장 4큰술, 설탕 1큰술, 다진마늘 1작은술",
 "<tr class='recipeList'><td>1. 떡볶이떡은 흐르는 물에 씻어 건지고, 양배추, 양파, 대파는 먹기 좋은 크기로 자른다.</td></tr>
 <tr class='recipeList'><td>2. 끓는 물에 라면을 꼬들꼬들하게 삶은 후 찬물에 헹궈 건진다.</td></tr>
@@ -70,7 +70,7 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 "명란오일파스타",
-"마늘5쪽, 명란젓2숟가락, 파스파 면1줌(90g) , 페퍼로치노 3개, 올리브유, 소금 후추약간",
+"마늘5쪽, 명란젓2숟가락, 파스타면1줌(90g) , 페퍼로치노 3개, 올리브유, 소금 후추약간",
 "X",
 "<tr class='recipeList'><td>1. 끓는 물(6컵)에 소금을 짜다싶을 정도로 넣고 파스타면을 넣어 7분 정도 삶고, 면 삶은 물은 1국자 남긴다.</td></tr>
 <tr class='recipeList'><td>2. 마늘을 얇게 납작 썰고, 명란젓은 투명한 막을 제거한다.</td></tr>
@@ -131,7 +131,6 @@ insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 "https://s3-ap-northeast-1.amazonaws.com/sh-recipe/cook6.jpg",
 0
 );
-
 
 insert into recipe (cookname,ingredient,seasoned,recipe,imgpath,rate) values(
 "유부초밥",
