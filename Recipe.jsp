@@ -95,14 +95,24 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 				}
 			</style>
 		</head>
-
+<style>
+    .keyFields{
+        margin-right: 0px;
+    }
+</style>
 <body href='./css/cssStyle.css' class="home blog mp6 customizer-styles-applied intro-text-center sidebar-none row-three-post highlander-enabled highlander-light demo-site infinite-scroll">
 <div id="page" class="hfeed site">
 	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-search-form">
-			<form role="search" method="get" class="search-form" action="http://www.naver.com/">
+            
+			<form role="search" method="get" class="search-form" action="./Recipe.jsp">
+                <select name="keyField" size=1 class="keyFields">
+                    <option value="name"> 이 름
+                    <option value="ingredient"> 재 료
+                    <option value="content"> 내 용
+                </select>
 				<label>
 					<span class="screen-reader-text">Search for:</span>
 					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
@@ -147,8 +157,16 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <jsp:useBean id="RecipeDTO" class="ch12.RecipeDTO"/>
 
 <%
+   String search = request.getParameter("s");
+   String keyF = request.getParameter("keyField");
+   
+   
    Vector<RecipeDTO> list = new Vector<RecipeDTO>();
-    list = RecipeDAO.getRecipeList();
+    if(search == null){
+        list = RecipeDAO.getRecipeList();
+    }else{
+        list = RecipeDAO.getRecipeListbySearch(keyF, search);   
+    }
     int vectorSize = list.size();
 %>
                 
