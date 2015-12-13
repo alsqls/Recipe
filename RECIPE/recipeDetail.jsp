@@ -177,43 +177,25 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                       <h1 class="cookName"><%=RecipeDTO.getCookname()%></h1> 
-                    </td>
+                    <td><h1 class="cookName">* <%=RecipeDTO.getCookname()%></h1></td>
                 </tr>
                 <tr>
-                    <td><h3>재료</h3></td>
+                    <td><h3>◆ 재료</h3> <h4> [ <%=RecipeDTO.getIngredient()%> ] </h4></td>
                 </tr>
                 <tr>
-                    <td><h4><%=RecipeDTO.getIngredient()%></h4></td>
+                    <td><h3>◆ 양념장</h3><h4> [ <%=RecipeDTO.getSeasoned()%> ] </h4></td>
                 </tr>
+                <tr><td><p></td></tr>
                 <tr>
-                    <td><h3>양념장</h3></td>
+                    <td><h3>◆ 만드는 법</h3><h4><%=RecipeDTO.getRecipe()%></h4></td>
                 </tr>
-                <tr>
-                    <td><h4><%=RecipeDTO.getSeasoned()%></h4></td>
-                </tr>
-                <tr>
-                    <td><h3>만드는 법</h3></td>
-                </tr>
-                <%=RecipeDTO.getRecipe()%>
+                <tr><td><p></td></tr>
             </table>
         </div>
     </div>
 </div>
 
-
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+               
                 
 <!--*********************************************-->
                 

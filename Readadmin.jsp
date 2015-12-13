@@ -7,77 +7,41 @@
 <jsp:useBean id="myDB" class="ch12.BoardMgr1" />
 <jsp:useBean id="utilMgr" class="ch12.UtilMgr"/>
 <%
+	
 	int num = Integer.parseInt(request.getParameter("num"));
 	int nowPage = Integer.parseInt(request.getParameter("page"));
 	String keyField = request.getParameter("keyField"); 
-    String keyWord = request.getParameter("keyWord");
+   	String keyWord = request.getParameter("keyWord");
+	boolean iscookie = false;	
+	Cookie[] cookies = request.getCookies();
+	Cookie viewCookie = null;
 	
-	Cookie[] cookies = request.getCookies(); //쿠키생성
-	
-	
-	boolean ii = false;
-	
-	cookies = request.getCookies(); 
-	
-	if(cookies.length>0){ //배열에 쿠키가 있다면
-		for(int i =0; i<cookies.length;i++){
-			if(cookies[i].getName().equals(String.valueOf(num))){ //글의 넘버와 같은게 존재
-				ii = true;
-				String cookieName = String.valueOf(num); //num의 value를 가진 cookie 새로 할당
-				Cookie cookie = new Cookie(cookieName, "1"); //1 로 해서 
-				cookie.setMaxAge(86400); //세션 하루동안 유지
-				cookie.setValue("1"); //1 : 조회수 올라감 0:조회수 안올라감 
-				response.addCookie(cookie); 
-			}
-		}
-	}
-	
-	if(cookies.length == 0){ //쿠키배열에 쿠키가 없다면
-		String cookieName = String.valueOf(num); // 쿠키 할당
-		Cookie cookie = new Cookie(cookieName, "1"); 
-		cookie.setMaxAge(86400); 
-		cookie.setValue("1");
-		response.addCookie(cookie); 
-	}
-	
-	if(ii == false){ //쿠키는 있지만 그 게시글의 num과 다르다면 조회수를 1 증가해야 함
-		String cookieName = String.valueOf(num);
-		Cookie cookie = new Cookie(cookieName, "1");
-		cookie.setMaxAge(86400);
-		cookie.setValue("1");
-		response.addCookie(cookie); 
-	}
-	cookies = request.getCookies(); 
-	
-	String tempIp="";
-	String isFirst="0";
-	
-	if(cookies.length>0){ //쿠키가 있다.
-		for(int i=0; i<cookies.length;i++){ 
-			if(cookies[i].getName().equals(String.valueOf(num))){
-				tempIp = cookies[i].getName(); //여기서는 필요없지만 쿠키name받아오기
-				isFirst = cookies[i].getValue(); // 쿠키 value값 isFirst에 할당
-			}
-		}
+	if(cookies != null && cookies.length > 0){
+ 	for(int i = 0; i< cookies.length; i++){
+   	if(cookies[i].getName().equals("VIEWCOOKIE")){ //Cookie의 name이 VIEWCOOKIE와 일치하는 쿠키를 viewCookie에 넣어준다.
+    	viewCookie = cookies[i];
+  		 }
+  	     }  
+ 	}
+	 if(viewCookie == null){
+	 Cookie newCookie = new Cookie("VIEWCOOKIE","|"+num+"|"); //("VIEWCOOKIE"는 name, "|"+bbsno+"|" 는 value 다. 
+  	 response.addCookie(newCookie);
+ 	 }
+    else{
+	 iscookie=true;
+ 	 String value = viewCookie.getValue();
+  	if(value.indexOf("|"+num+"|") < 0){ 
+   	 myDB.upCount(num);
+	 value = value+"|"+num+"|";
+   	 viewCookie.setValue(value);
+   	 response.addCookie(viewCookie);
+ 	 }
 	}
 
-	BoardBean tempBoard = myDB.getBoardUp(num,isFirst); // isFirst가 0과 같으면 num의 게시글 조회수 ++ 
-	
-	cookies = request.getCookies(); 
-	
-	if(cookies.length>0){
-		for(int i=0; i<cookies.length;i++){ 
-			if(cookies[i].getName().equals(String.valueOf(num))){
-				
-				String cookieName = String.valueOf(num);
-				Cookie cookie = new Cookie(cookieName, "1");
-				cookie.setMaxAge(86400);
-				cookie.setValue("1");
-				response.addCookie(cookie); 
-			}
-		}
-	}
-		
+	if(iscookie){
+    myDB.downCount(num);
+    }
+	BoardBean tempBoard = myDB.getBoard(num);
 	String name = tempBoard.getName();
 	String email = tempBoard.getEmail();
 	String homepage = tempBoard.getHomepage();
@@ -85,7 +49,9 @@
 	String regdate = tempBoard.getRegdate();
 	String content = tempBoard.getContent();
 	String ip = tempBoard.getIp();
-	int count= tempBoard.getCount();
+	int count= tempBoard.getCount();	
+	
+	
 %>
 <html>
 <head>
@@ -287,7 +253,6 @@ if(keyWord==null || keyWord.equals("null")){ %>
         </div>
 <!-- Footer Block Center -->
             <div class="footer-block footer-widget-area element-height" role="complementary">
-				rrr			
             </div>	
 				
 			<!-- Footer Block Right -->

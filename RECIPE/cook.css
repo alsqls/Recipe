@@ -1,6 +1,6 @@
 .cookName{
     text-align: center;
-    font-size: 5em;
+    font-size: 3em;
 }
 
 #noBorder{
@@ -10,6 +10,7 @@
 }
 
 #noBorder td{
+    
     border-bottom: 0px;
     border-top: 0px;
     border-left: 0px;
@@ -31,4 +32,10 @@
 
 .recipe{
     font-size:12px;
+}
+
+tr .recipeList{
+    
+    text-align: left;
+    font-family: "함초롬돋움";
 }

@@ -198,8 +198,7 @@ function list(){
             </div>
         </div>
 <!-- Footer Block Center -->
-            <div class="footer-block footer-widget-area element-height" role="complementary">
-				rrr			
+            <div class="footer-block footer-widget-area element-height" role="complementary">		
             </div>	
 				
 			<!-- Footer Block Right -->

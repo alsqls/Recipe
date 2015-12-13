@@ -167,11 +167,11 @@ function list(){
    <table border=0>
     <tr>
      <td width=20%>성 명</td>
-     <td align=left width=80%><input type=text name=name value="<%=name%>" size=30 maxlength=20></td>
+     <td align=left width=80%><input type=text name=name value="<%=name%>" size=30 maxlength=20 readonly=readonly></td>
 	</tr>
     <tr>
      <td width=20%>E-Mail</td>
-     <td align=left width=80%><input type=text name=email size=30 value="<%=email%>" maxlength=30></td>
+     <td align=left width=80%><input type=text name=email size=30 value="<%=email%>" maxlength=30 readonly= readonly></td>
     </tr>
 	<tr>
      <td width=20%>제 목</td>
