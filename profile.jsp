@@ -48,7 +48,7 @@
 	<div class="site-wrapper">
 		<div class="container">
 			<form class="form-signup" name="f" method="post" action="./memberUpdate.jsp">
-		          <center><h2 style="color: #555" class="form-signup-heading">회원 정보</h2></center>
+		          <center><h2 style="color: #555" class="form-signup-heading">☞ My Profile </h2></center>
 				<div class="row">
 					<input type="text" name="id" id="fancy-text" readonly="readonly" value="<%=mem_id%>"/> <label for="fancy-text">아이디</label>
 				</div>
