@@ -195,10 +195,9 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
 <%
                         }else{
 %>
-                        
                             <button class="notlike" onclick="likeClick();" value="좋아요">좋아요</button>
                             <input type="hidden" name="num" value="<%=RecipeDTO.getNum()%>"/>
-                        
+                        </form>
 <%
                         }
 %>
