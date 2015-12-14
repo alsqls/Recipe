@@ -49,22 +49,24 @@
 		<div class="container">
 			<form class="form-signup" name="f" method="post" action="./memberUpdate.jsp">
 		          <center><h2 style="color: #555" class="form-signup-heading">☞ My Profile </h2></center>
+                
 				<div class="row">
-					<input type="text" name="id" id="fancy-text" readonly="readonly" value="<%=mem_id%>"/> <label for="fancy-text">아이디</label>
+					<input type="text" name="id" id="fancy-text" readonly="readonly" value="<%=mem_id%>"/> <label for="fancy-text">Id</label>
 				</div>
 
 				<div class="row">
-					<input type="text" name="passwd" id="fancy-text" value="<%=passwd%>"/> <label for="fancy-text">패스워드</label>
+					<input type="text" name="passwd" id="fancy-text" value="<%=passwd%>"/> <label for="fancy-text">Password</label>
 				</div>
 				
 				<div class="row">
-					<input type="text" name="name" id="fancy-text" value="<%=name%>"/> <label for="fancy-text">이름</label>
+					<input type="text" name="name" id="fancy-text" value="<%=name%>"/> <label for="fancy-text">Name</label>
 				</div>
 				
 				<div class="row">
-					<input type="text" name="email" id="fancy-text" value="<%=e_mail%>"/> <label for="fancy-text">이메일</label>
+					<input type="text" name="email" id="fancy-text" value="<%=e_mail%>"/> <label for="fancy-text">E_mail</label>
 				</div>
 				<center>
+                    <button	onclick="homeCheck();" type="button">홈으로</button>
 				<button	onclick="inputCheck();" type="button">수정</button>
 				<button	onclick="cancel();" type="button">취소</button>
                  <button type="button" onclick="deleteCheck();">탈퇴</button>
@@ -135,4 +137,9 @@
             location.href = "./DeleteInfo.jsp";
 		}
 	}
+     function homeCheck() {
+            location.href = "./index.jsp";
+		}
+	
+    
 </script>

@@ -275,7 +275,7 @@ function list(){ //목록
     
 <center><br>
     
-<h3> Recipe shared Here!</h3><br>
+<h3> Share Together </h3><br>
 
 <table align=center border=0 width=80%>
  <tr>

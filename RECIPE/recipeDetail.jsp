@@ -216,7 +216,7 @@ function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!
                     <td><%=RecipeDTO.getRate()%></td>
                 </tr>
                 <tr>
-                    <td><h1 class="cookName">* <%=RecipeDTO.getCookname()%></h1></td>
+                    <td><h1 class="cookName"> ☞ <%=RecipeDTO.getCookname()%></h1></td>
                 </tr>
                 <tr>
                     <td><h3>◆ 재료</h3> <h4> [ <%=RecipeDTO.getIngredient()%> ] </h4></td>

@@ -262,6 +262,7 @@ body {
 .card .button-container button {
   outline: 0;
   cursor: pointer;
+  margin-right: 30px; 
   position: relative;
   display: inline-block;
   background: 0;

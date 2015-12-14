@@ -37,7 +37,7 @@
   <h1>Login</h1>
 </div>
 <div class="rerun"><a href="">Rerun Pen</a>  <a href="./index.jsp">Home</a></div>
-
+<script language="JavaScript" src="./js/script.js"></script>
 <div class="container">
   <div class="card"></div>
   <div class="card">
@@ -61,11 +61,16 @@
   <div class="card alt">
     <div class="toggle"></div>
     <h1 class="title">Register
-    <form method="post" action="./Register.jsp">
+    <form name="regForm" method="post" action="./Register.jsp">
+        <script language="JavaScript" src="./js/script.js"></script>
       <div class="close"></div>
     </h1>
       <div class="input-container">
+            <div class="button-container">
+          <input type="button" value="ID중복확인" onClick="idCheck(this.form.id.value)">
+          </div>
         <input type="text" id="Username" required="required" name="id"/>
+    
         <label for="Username">Id</label>
         <div class="bar"></div>
       </div>
